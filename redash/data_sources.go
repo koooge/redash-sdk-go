@@ -6,7 +6,7 @@ import (
 )
 
 type GetDataSourcesInput struct {
-	Id int
+	DataSourceId int
 }
 
 type GetDataSourcesOutput struct {
@@ -15,7 +15,7 @@ type GetDataSourcesOutput struct {
 }
 
 func (c *Client) GetDataSources(input *GetDataSourcesInput) *GetDataSourcesOutput {
-	path := "/api/data_sources/" + strconv.Itoa(input.Id)
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId)
 
 	resp, err := c.Get(path)
 	if err != nil {

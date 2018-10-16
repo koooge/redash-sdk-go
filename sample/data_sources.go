@@ -17,7 +17,7 @@ func main() {
 	client := redash.NewClient(config)
 
 	input := &redash.GetDataSourcesInput{
-		Id: dataSourceId,
+		DataSourceId: dataSourceId,
 	}
 
 	output := client.GetDataSources(input)
