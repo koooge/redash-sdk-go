@@ -21,5 +21,6 @@ func main() {
 	}
 
 	output := client.GetDataSources(input)
-	fmt.Println(output)
+	fmt.Println(output.Body)
+	fmt.Println(output.StatusCode)
 }
