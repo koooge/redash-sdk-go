@@ -15,7 +15,7 @@ type GetDestinationsOutput struct {
 }
 
 func (c *Client) GetDestinations(input *GetDestinationsInput) *GetDestinationsOutput {
-	path := "/api/users/" + strconv.Itoa(input.DestinationId)
+	path := "/api/destinations/" + strconv.Itoa(input.DestinationId)
 
 	resp, err := c.Get(path)
 	if err != nil {
