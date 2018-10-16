@@ -7,6 +7,8 @@ import (
 	"github.com/koooge/redash-sdk-go/redash"
 )
 
+const dataSourceId = 3
+
 func main() {
 	config := &redash.Config{
 		EndpointUrl: os.Getenv("REDASH_ENDPOINT_URL"),
@@ -15,13 +17,9 @@ func main() {
 	client := redash.NewClient(config)
 
 	input := &redash.GetDataSourcesInput{
-		Id: id,
+		Id: dataSourceId,
 	}
 
-	output, err := client.GetDataSources(input)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	output := client.GetDataSources(input)
 	fmt.Println(output)
 }
