@@ -50,3 +50,24 @@ func (c *Client) GetQueryList() *GetQueryListOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetQuerySearchOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
+	path := "/api/queries/search"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQuerySearchOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQuerySearchOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
