@@ -39,4 +39,9 @@ func main() {
 	output4 := client.GetQueryRecent()
 	fmt.Println(output4.Body)
 	fmt.Println(output4.StatusCode)
+
+	// GetMyQueries()
+	output5 := client.GetMyQueries()
+	fmt.Println(output5.Body)
+	fmt.Println(output5.StatusCode)
 }
