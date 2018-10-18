@@ -23,4 +23,8 @@ func main() {
 	output := client.GetDataSource(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
+
+	output2 := client.GetDataSourceList()
+	fmt.Println(output2.Body)
+	fmt.Println(output2.StatusCode)
 }
