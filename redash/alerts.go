@@ -29,3 +29,24 @@ func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetAlertListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetAlertList() *GetAlertListOutput {
+	path := "/api/alerts"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetAlertListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetAlertListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}

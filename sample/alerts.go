@@ -23,4 +23,8 @@ func main() {
 	output := client.GetAlert(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
+
+	output2 := client.GetAlertList()
+	fmt.Println(output2.Body)
+	fmt.Println(output2.StatusCode)
 }
