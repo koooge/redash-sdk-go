@@ -23,4 +23,8 @@ func main() {
 	output := client.GetUser(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
+
+	output2 := client.GetUserList()
+	fmt.Println(output2.Body)
+	fmt.Println(output2.StatusCode)
 }
