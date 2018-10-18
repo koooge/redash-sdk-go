@@ -23,4 +23,8 @@ func main() {
 	output := client.GetGroup(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
+
+	output2 := client.GetGroupList()
+	fmt.Println(output2.Body)
+	fmt.Println(output2.StatusCode)
 }
