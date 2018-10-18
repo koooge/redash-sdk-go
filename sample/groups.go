@@ -16,11 +16,11 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	input := &redash.GetGroupsInput{
+	input := &redash.GetGroupInput{
 		GroupId: groupId,
 	}
 
-	output := client.GetGroups(input)
+	output := client.GetGroup(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

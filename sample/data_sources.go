@@ -16,11 +16,11 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	input := &redash.GetDataSourcesInput{
+	input := &redash.GetDataSourceInput{
 		DataSourceId: dataSourceId,
 	}
 
-	output := client.GetDataSources(input)
+	output := client.GetDataSource(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

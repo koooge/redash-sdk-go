@@ -5,26 +5,26 @@ import (
 	"strconv"
 )
 
-type GetUsersInput struct {
+type GetUserInput struct {
 	UserId int
 }
 
-type GetUsersOutput struct {
+type GetUserOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetUsers(input *GetUsersInput) *GetUsersOutput {
+func (c *Client) GetUser(input *GetUserInput) *GetUserOutput {
 	path := "/api/users/" + strconv.Itoa(input.UserId)
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetUsersOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetUserOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetUsersOutput{
+	return &GetUserOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}

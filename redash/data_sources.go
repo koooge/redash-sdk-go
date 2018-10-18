@@ -5,26 +5,26 @@ import (
 	"strconv"
 )
 
-type GetDataSourcesInput struct {
+type GetDataSourceInput struct {
 	DataSourceId int
 }
 
-type GetDataSourcesOutput struct {
+type GetDataSourceOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDataSources(input *GetDataSourcesInput) *GetDataSourcesOutput {
+func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput {
 	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId)
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetDataSourcesOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDataSourceOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDataSourcesOutput{
+	return &GetDataSourceOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}

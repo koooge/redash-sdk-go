@@ -5,26 +5,26 @@ import (
 	"strconv"
 )
 
-type GetQueriesInput struct {
+type GetQueryInput struct {
 	QueryId int
 }
 
-type GetQueriesOutput struct {
+type GetQueryOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetQueries(input *GetQueriesInput) *GetQueriesOutput {
+func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 	path := "/api/queries/" + strconv.Itoa(input.QueryId)
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueriesOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueriesOutput{
+	return &GetQueryOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}

@@ -5,26 +5,26 @@ import (
 	"strconv"
 )
 
-type GetGroupsInput struct {
+type GetGroupInput struct {
 	GroupId int
 }
 
-type GetGroupsOutput struct {
+type GetGroupOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetGroups(input *GetGroupsInput) *GetGroupsOutput {
+func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput {
 	path := "/api/groups/" + strconv.Itoa(input.GroupId)
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetGroupsOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetGroupOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupsOutput{
+	return &GetGroupOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}

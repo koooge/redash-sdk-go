@@ -16,11 +16,11 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	input := &redash.GetAlertsInput{
+	input := &redash.GetAlertInput{
 		AlertId: alertId,
 	}
 
-	output := client.GetAlerts(input)
+	output := client.GetAlert(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

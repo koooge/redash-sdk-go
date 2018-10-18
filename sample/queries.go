@@ -16,11 +16,11 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	input := &redash.GetQueriesInput{
+	input := &redash.GetQueryInput{
 		QueryId: queryId,
 	}
 
-	output := client.GetQueries(input)
+	output := client.GetQuery(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

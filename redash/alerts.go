@@ -5,26 +5,26 @@ import (
 	"strconv"
 )
 
-type GetAlertsInput struct {
+type GetAlertInput struct {
 	AlertId int
 }
 
-type GetAlertsOutput struct {
+type GetAlertOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetAlerts(input *GetAlertsInput) *GetAlertsOutput {
+func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput {
 	path := "/api/alerts/" + strconv.Itoa(input.AlertId)
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetAlertsOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetAlertOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertsOutput{
+	return &GetAlertOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}
