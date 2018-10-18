@@ -8,6 +8,7 @@ import (
 )
 
 const alertId = 1
+const subscriberId = 1
 
 func main() {
 	config := &redash.Config{
@@ -16,6 +17,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	// GetAlert()
 	input := &redash.GetAlertInput{
 		AlertId: alertId,
 	}
@@ -24,7 +26,17 @@ func main() {
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
+	// GetAlertList()
 	output2 := client.GetAlertList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
+
+	// GetAlertSubscriptionList()
+	input3 := &redash.GetAlertSubscriptionListInput{
+		AlertId: alertId,
+	}
+
+	output3 := client.GetAlertSubscriptionList(input3)
+	fmt.Println(output3.Body)
+	fmt.Println(output3.StatusCode)
 }

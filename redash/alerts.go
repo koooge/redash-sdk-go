@@ -50,3 +50,28 @@ func (c *Client) GetAlertList() *GetAlertListOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetAlertSubscriptionListInput struct {
+	AlertId int
+}
+
+type GetAlertSubscriptionListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput {
+	path := "/api/alerts/" + strconv.Itoa(input.AlertId) + "/subscriptions"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetAlertSubscriptionListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetAlertSubscriptionListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
