@@ -16,6 +16,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	// GetDestination()
 	input := &redash.GetDestinationInput{
 		DestinationId: destinationId,
 	}
@@ -24,7 +25,13 @@ func main() {
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
+	// GetDestinationList()
 	output2 := client.GetDestinationList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
+
+	// GetDestinationTypeList()
+	output3 := client.GetDestinationTypeList()
+	fmt.Println(output3.Body)
+	fmt.Println(output3.StatusCode)
 }
