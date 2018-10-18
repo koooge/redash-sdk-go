@@ -32,22 +32,40 @@ func (c *Client) Delete(path string, body string) (*http.Response, error)
 func (c *Client) Get(path string) (*http.Response, error)
 ```
 
-#### func (*Client) GetAlerts
+#### func (*Client) GetAlert
 
 ```go
-func (c *Client) GetAlerts(input *GetAlertsInput) *GetAlertsOutput
+func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput
 ```
 
-#### func (*Client) GetDataSources
+#### func (*Client) GetAlertList
 
 ```go
-func (c *Client) GetDataSources(input *GetDataSourcesInput) *GetDataSourcesOutput
+func (c *Client) GetAlertList() *GetAlertListOutput
 ```
 
-#### func (*Client) GetDestinations
+#### func (*Client) GetDataSource
 
 ```go
-func (c *Client) GetDestinations(input *GetDestinationsInput) *GetDestinationsOutput
+func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput
+```
+
+#### func (*Client) GetDataSourceList
+
+```go
+func (c *Client) GetDataSourceList() *GetDataSourceListOutput
+```
+
+#### func (*Client) GetDestination
+
+```go
+func (c *Client) GetDestination(input *GetDestinationInput) *GetDestinationOutput
+```
+
+#### func (*Client) GetDestinationList
+
+```go
+func (c *Client) GetDestinationList() *GetDestinationListOutput
 ```
 
 #### func (*Client) GetEvents
@@ -56,40 +74,64 @@ func (c *Client) GetDestinations(input *GetDestinationsInput) *GetDestinationsOu
 func (c *Client) GetEvents() *GetEventsOutput
 ```
 
-#### func (*Client) GetGroups
+#### func (*Client) GetGroup
 
 ```go
-func (c *Client) GetGroups(input *GetGroupsInput) *GetGroupsOutput
+func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput
+```
+
+#### func (*Client) GetGroupList
+
+```go
+func (c *Client) GetGroupList() *GetGroupListOutput
 ```
 
 #### func (*Client) GetOrganizationSettings
 
 ```go
-func (c *Client) GetOrganizationSettings() *GetSettingsOutput
+func (c *Client) GetOrganizationSettings() *GetOrganizationSettingsOutput
 ```
 
-#### func (*Client) GetQueries
+#### func (*Client) GetQuery
 
 ```go
-func (c *Client) GetQueries(input *GetQueriesInput) *GetQueriesOutput
+func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput
 ```
 
-#### func (*Client) GetQueryResults
+#### func (*Client) GetQueryList
 
 ```go
-func (c *Client) GetQueryResults(input *GetQueryResultsInput) *GetQueryResultsOutput
+func (c *Client) GetQueryList() *GetQueryListOutput
 ```
 
-#### func (*Client) GetQuerySnippets
+#### func (*Client) GetQueryResult
 
 ```go
-func (c *Client) GetQuerySnippets(input *GetQuerySnippetsInput) *GetQuerySnippetsOutput
+func (c *Client) GetQueryResult(input *GetQueryResultInput) *GetQueryResultOutput
 ```
 
-#### func (*Client) GetUsers
+#### func (*Client) GetQuerySnippet
 
 ```go
-func (c *Client) GetUsers(input *GetUsersInput) *GetUsersOutput
+func (c *Client) GetQuerySnippet(input *GetQuerySnippetInput) *GetQuerySnippetOutput
+```
+
+#### func (*Client) GetQuerySnippetList
+
+```go
+func (c *Client) GetQuerySnippetList() *GetQuerySnippetListOutput
+```
+
+#### func (*Client) GetUser
+
+```go
+func (c *Client) GetUser(input *GetUserInput) *GetUserOutput
+```
+
+#### func (*Client) GetUserList
+
+```go
+func (c *Client) GetUserList() *GetUserListOutput
 ```
 
 #### func (*Client) Post
@@ -120,57 +162,87 @@ type Config struct {
 ```
 
 
-#### type GetAlertsInput
+#### type GetAlertInput
 
 ```go
-type GetAlertsInput struct {
+type GetAlertInput struct {
 	AlertId int
 }
 ```
 
 
-#### type GetAlertsOutput
+#### type GetAlertListOutput
 
 ```go
-type GetAlertsOutput struct {
+type GetAlertListOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetDataSourcesInput
+#### type GetAlertOutput
 
 ```go
-type GetDataSourcesInput struct {
+type GetAlertOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDataSourceInput
+
+```go
+type GetDataSourceInput struct {
 	DataSourceId int
 }
 ```
 
 
-#### type GetDataSourcesOutput
+#### type GetDataSourceListOutput
 
 ```go
-type GetDataSourcesOutput struct {
+type GetDataSourceListOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetDestinationsInput
+#### type GetDataSourceOutput
 
 ```go
-type GetDestinationsInput struct {
+type GetDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDestinationInput
+
+```go
+type GetDestinationInput struct {
 	DestinationId int
 }
 ```
 
 
-#### type GetDestinationsOutput
+#### type GetDestinationListOutput
 
 ```go
-type GetDestinationsOutput struct {
+type GetDestinationListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDestinationOutput
+
+```go
+type GetDestinationOutput struct {
 	Body       string
 	StatusCode int
 }
@@ -187,105 +259,145 @@ type GetEventsOutput struct {
 ```
 
 
-#### type GetGroupsInput
+#### type GetGroupInput
 
 ```go
-type GetGroupsInput struct {
+type GetGroupInput struct {
 	GroupId int
 }
 ```
 
 
-#### type GetGroupsOutput
+#### type GetGroupListOutput
 
 ```go
-type GetGroupsOutput struct {
+type GetGroupListOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetQueriesInput
+#### type GetGroupOutput
 
 ```go
-type GetQueriesInput struct {
+type GetGroupOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetOrganizationSettingsOutput
+
+```go
+type GetOrganizationSettingsOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetQueryInput
+
+```go
+type GetQueryInput struct {
 	QueryId int
 }
 ```
 
 
-#### type GetQueriesOutput
+#### type GetQueryListOutput
 
 ```go
-type GetQueriesOutput struct {
+type GetQueryListOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetQueryResultsInput
+#### type GetQueryOutput
 
 ```go
-type GetQueryResultsInput struct {
+type GetQueryOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetQueryResultInput
+
+```go
+type GetQueryResultInput struct {
 	QueryResultId int
 }
 ```
 
 
-#### type GetQueryResultsOutput
+#### type GetQueryResultOutput
 
 ```go
-type GetQueryResultsOutput struct {
+type GetQueryResultOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetQuerySnippetsInput
+#### type GetQuerySnippetInput
 
 ```go
-type GetQuerySnippetsInput struct {
+type GetQuerySnippetInput struct {
 	QuerySnippetId int
 }
 ```
 
 
-#### type GetQuerySnippetsOutput
+#### type GetQuerySnippetListOutput
 
 ```go
-type GetQuerySnippetsOutput struct {
+type GetQuerySnippetListOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetSettingsOutput
+#### type GetQuerySnippetOutput
 
 ```go
-type GetSettingsOutput struct {
+type GetQuerySnippetOutput struct {
 	Body       string
 	StatusCode int
 }
 ```
 
 
-#### type GetUsersInput
+#### type GetUserInput
 
 ```go
-type GetUsersInput struct {
+type GetUserInput struct {
 	UserId int
 }
 ```
 
 
-#### type GetUsersOutput
+#### type GetUserListOutput
 
 ```go
-type GetUsersOutput struct {
+type GetUserListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetUserOutput
+
+```go
+type GetUserOutput struct {
 	Body       string
 	StatusCode int
 }
