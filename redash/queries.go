@@ -29,3 +29,24 @@ func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetQueryListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQueryList() *GetQueryListOutput {
+	path := "/api/queries"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQueryListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
