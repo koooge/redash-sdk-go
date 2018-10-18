@@ -29,3 +29,24 @@ func (c *Client) GetQuerySnippet(input *GetQuerySnippetInput) *GetQuerySnippetOu
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetQuerySnippetListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQuerySnippetList() *GetQuerySnippetListOutput {
+	path := "/api/query_snippets"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQuerySnippetListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQuerySnippetListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
