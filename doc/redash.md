@@ -44,6 +44,12 @@ func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput
 func (c *Client) GetAlertList() *GetAlertListOutput
 ```
 
+#### func (*Client) GetAlertSubscriptionList
+
+```go
+func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput
+```
+
 #### func (*Client) GetDataSource
 
 ```go
@@ -56,6 +62,12 @@ func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput
 func (c *Client) GetDataSourceList() *GetDataSourceListOutput
 ```
 
+#### func (*Client) GetDataSourceSchema
+
+```go
+func (c *Client) GetDataSourceSchema(input *GetDataSourceSchemaInput) *GetDataSourceSchemaOutput
+```
+
 #### func (*Client) GetDestination
 
 ```go
@@ -66,6 +78,12 @@ func (c *Client) GetDestination(input *GetDestinationInput) *GetDestinationOutpu
 
 ```go
 func (c *Client) GetDestinationList() *GetDestinationListOutput
+```
+
+#### func (*Client) GetDestinationTypeList
+
+```go
+func (c *Client) GetDestinationTypeList() *GetDestinationTypeListOutput
 ```
 
 #### func (*Client) GetEvents
@@ -86,6 +104,24 @@ func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput
 func (c *Client) GetGroupList() *GetGroupListOutput
 ```
 
+#### func (*Client) GetGroupMemberList
+
+```go
+func (c *Client) GetGroupMemberList(input *GetGroupMemberListInput) *GetGroupMemberListOutput
+```
+
+#### func (*Client) GetJob
+
+```go
+func (c *Client) GetJob(input *GetJobInput) *GetJobOutput
+```
+
+#### func (*Client) GetMyQueries
+
+```go
+func (c *Client) GetMyQueries() *GetMyQueriesOutput
+```
+
 #### func (*Client) GetOrganizationSettings
 
 ```go
@@ -104,10 +140,22 @@ func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput
 func (c *Client) GetQueryList() *GetQueryListOutput
 ```
 
+#### func (*Client) GetQueryRecent
+
+```go
+func (c *Client) GetQueryRecent() *GetQueryRecentOutput
+```
+
 #### func (*Client) GetQueryResult
 
 ```go
 func (c *Client) GetQueryResult(input *GetQueryResultInput) *GetQueryResultOutput
+```
+
+#### func (*Client) GetQuerySearch
+
+```go
+func (c *Client) GetQuerySearch() *GetQuerySearchOutput
 ```
 
 #### func (*Client) GetQuerySnippet
@@ -120,6 +168,12 @@ func (c *Client) GetQuerySnippet(input *GetQuerySnippetInput) *GetQuerySnippetOu
 
 ```go
 func (c *Client) GetQuerySnippetList() *GetQuerySnippetListOutput
+```
+
+#### func (*Client) GetQueryTags
+
+```go
+func (c *Client) GetQueryTags() *GetQueryTagsOutput
 ```
 
 #### func (*Client) GetUser
@@ -191,6 +245,25 @@ type GetAlertOutput struct {
 ```
 
 
+#### type GetAlertSubscriptionListInput
+
+```go
+type GetAlertSubscriptionListInput struct {
+	AlertId int
+}
+```
+
+
+#### type GetAlertSubscriptionListOutput
+
+```go
+type GetAlertSubscriptionListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
 #### type GetDataSourceInput
 
 ```go
@@ -214,6 +287,25 @@ type GetDataSourceListOutput struct {
 
 ```go
 type GetDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDataSourceSchemaInput
+
+```go
+type GetDataSourceSchemaInput struct {
+	DataSourceId int
+}
+```
+
+
+#### type GetDataSourceSchemaOutput
+
+```go
+type GetDataSourceSchemaOutput struct {
 	Body       string
 	StatusCode int
 }
@@ -249,6 +341,16 @@ type GetDestinationOutput struct {
 ```
 
 
+#### type GetDestinationTypeListOutput
+
+```go
+type GetDestinationTypeListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
 #### type GetEventsOutput
 
 ```go
@@ -278,10 +380,58 @@ type GetGroupListOutput struct {
 ```
 
 
+#### type GetGroupMemberListInput
+
+```go
+type GetGroupMemberListInput struct {
+	GroupId int
+}
+```
+
+
+#### type GetGroupMemberListOutput
+
+```go
+type GetGroupMemberListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
 #### type GetGroupOutput
 
 ```go
 type GetGroupOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetJobInput
+
+```go
+type GetJobInput struct {
+	JobId int
+}
+```
+
+
+#### type GetJobOutput
+
+```go
+type GetJobOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetMyQueriesOutput
+
+```go
+type GetMyQueriesOutput struct {
 	Body       string
 	StatusCode int
 }
@@ -327,6 +477,16 @@ type GetQueryOutput struct {
 ```
 
 
+#### type GetQueryRecentOutput
+
+```go
+type GetQueryRecentOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
 #### type GetQueryResultInput
 
 ```go
@@ -340,6 +500,16 @@ type GetQueryResultInput struct {
 
 ```go
 type GetQueryResultOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetQuerySearchOutput
+
+```go
+type GetQuerySearchOutput struct {
 	Body       string
 	StatusCode int
 }
@@ -369,6 +539,16 @@ type GetQuerySnippetListOutput struct {
 
 ```go
 type GetQuerySnippetOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetQueryTagsOutput
+
+```go
+type GetQueryTagsOutput struct {
 	Body       string
 	StatusCode int
 }
