@@ -50,3 +50,28 @@ func (c *Client) GetDataSourceList() *GetDataSourceListOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetDataSourceSchemaInput struct {
+	DataSourceId int
+}
+
+type GetDataSourceSchemaOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetDataSourceSchema(input *GetDataSourceSchemaInput) *GetDataSourceSchemaOutput {
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/schema"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetDataSourceSchemaOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetDataSourceSchemaOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
