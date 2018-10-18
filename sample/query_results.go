@@ -8,6 +8,7 @@ import (
 )
 
 const queryResultId = 271647
+const jobId = 1
 
 func main() {
 	config := &redash.Config{
@@ -16,6 +17,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	// GetQueryResult()
 	input := &redash.GetQueryResultInput{
 		QueryResultId: queryResultId,
 	}
@@ -23,4 +25,13 @@ func main() {
 	output := client.GetQueryResult(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
+
+	// GetJob()
+	input2 := &redash.GetJobInput{
+		JobId: jobId,
+	}
+
+	output2 := client.GetJob(input2)
+	fmt.Println(output2.Body)
+	fmt.Println(output2.StatusCode)
 }
