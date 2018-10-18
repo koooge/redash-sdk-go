@@ -113,3 +113,24 @@ func (c *Client) GetMyQueries() *GetMyQueriesOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetQueryTagsOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQueryTags() *GetQueryTagsOutput {
+	path := "/api/queries/tags"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQueryTagsOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQueryTagsOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}

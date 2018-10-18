@@ -44,4 +44,9 @@ func main() {
 	output5 := client.GetMyQueries()
 	fmt.Println(output5.Body)
 	fmt.Println(output5.StatusCode)
+
+	// GetQueryTags()
+	output6 := client.GetQueryTags()
+	fmt.Println(output6.Body)
+	fmt.Println(output6.StatusCode)
 }
