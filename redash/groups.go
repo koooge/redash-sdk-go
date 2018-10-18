@@ -50,3 +50,28 @@ func (c *Client) GetGroupList() *GetGroupListOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetGroupMemberListInput struct {
+	GroupId int
+}
+
+type GetGroupMemberListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetGroupMemberList(input *GetGroupMemberListInput) *GetGroupMemberListOutput {
+	path := "/api/groups/" + strconv.Itoa(input.GroupId) + "/members"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetGroupMemberListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetGroupMemberListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
