@@ -34,4 +34,9 @@ func main() {
 	output3 := client.GetQuerySearch()
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
+
+	// GetQueryRecent()
+	output4 := client.GetQueryRecent()
+	fmt.Println(output4.Body)
+	fmt.Println(output4.StatusCode)
 }

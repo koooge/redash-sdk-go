@@ -71,3 +71,24 @@ func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
 		StatusCode: resp.StatusCode,
 	}
 }
+
+type GetQueryRecentOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQueryRecent() *GetQueryRecentOutput {
+	path := "/api/queries/recent"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQueryRecentOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQueryRecentOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+}
