@@ -6,6 +6,24 @@ import (
 	"strconv"
 )
 
+type GetQueryListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetQueryList() *GetQueryListOutput {
+	path := "/api/queries"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
+}
+
 type GetQueryInput struct {
 	QueryId int
 }
@@ -26,24 +44,6 @@ func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 
 	b, _ := ioutil.ReadAll(resp.Body)
 	return &GetQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
-}
-
-type GetQueryListOutput struct {
-	Body       string
-	StatusCode int
-}
-
-func (c *Client) GetQueryList() *GetQueryListOutput {
-	path := "/api/queries"
-
-	resp, err := c.Get(path)
-	if err != nil {
-		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
-	}
-	defer resp.Body.Close()
-
-	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQuerySearchOutput struct {

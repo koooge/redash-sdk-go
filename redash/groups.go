@@ -5,6 +5,24 @@ import (
 	"strconv"
 )
 
+type GetGroupListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetGroupList() *GetGroupListOutput {
+	path := "/api/groups"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetGroupListOutput{Body: string(b), StatusCode: resp.StatusCode}
+}
+
 type GetGroupInput struct {
 	GroupId int
 }
@@ -25,24 +43,6 @@ func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput {
 
 	b, _ := ioutil.ReadAll(resp.Body)
 	return &GetGroupOutput{Body: string(b), StatusCode: resp.StatusCode}
-}
-
-type GetGroupListOutput struct {
-	Body       string
-	StatusCode int
-}
-
-func (c *Client) GetGroupList() *GetGroupListOutput {
-	path := "/api/groups"
-
-	resp, err := c.Get(path)
-	if err != nil {
-		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
-	}
-	defer resp.Body.Close()
-
-	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetGroupMemberListInput struct {

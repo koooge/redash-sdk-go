@@ -5,6 +5,24 @@ import (
 	"strconv"
 )
 
+type GetDataSourceListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetDataSourceList() *GetDataSourceListOutput {
+	path := "/api/data_sources"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetDataSourceListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetDataSourceListOutput{Body: string(b), StatusCode: resp.StatusCode}
+}
+
 type GetDataSourceInput struct {
 	DataSourceId int
 }
@@ -25,24 +43,6 @@ func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput {
 
 	b, _ := ioutil.ReadAll(resp.Body)
 	return &GetDataSourceOutput{Body: string(b), StatusCode: resp.StatusCode}
-}
-
-type GetDataSourceListOutput struct {
-	Body       string
-	StatusCode int
-}
-
-func (c *Client) GetDataSourceList() *GetDataSourceListOutput {
-	path := "/api/data_sources"
-
-	resp, err := c.Get(path)
-	if err != nil {
-		return &GetDataSourceListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
-	}
-	defer resp.Body.Close()
-
-	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDataSourceListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetDataSourceSchemaInput struct {
