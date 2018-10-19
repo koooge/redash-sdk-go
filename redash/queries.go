@@ -1,6 +1,7 @@
 package redash
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"strconv"
 )
@@ -133,4 +134,35 @@ func (c *Client) GetQueryTags() *GetQueryTagsOutput {
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}
+}
+
+type PostQueryListInput struct {
+	DataSourceId int    `json:"data_source_id"`
+	Query        string `json:"query"`
+	Name         string `json:"name"`
+	Description  string `json:"description,omitempty"`
+	Schedule     string `json:"schedule,omitempty"`
+}
+
+type PostQueryListOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput {
+	path := "/api/queries"
+
+	body, err := json.Marshal(input)
+	if err != nil {
+		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+
+	resp, err := c.Post(path, string(body))
+	if err != nil {
+		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &PostQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

@@ -49,7 +49,7 @@ func (c *Client) Request(httpMethod string, path string, body string) (*http.Res
 		return nil, err
 	}
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode >= 300 {
 		b, _ := ioutil.ReadAll(resp.Body)
 		return resp, fmt.Errorf("http response is not OK. code: %d, method: %s, url: %s\nRequestBody: `%s`\nResponseBody: `%s`", resp.StatusCode, httpMethod, url, body, string(b))
 	}

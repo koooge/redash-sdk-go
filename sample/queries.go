@@ -3,10 +3,12 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/koooge/redash-sdk-go/redash"
 )
 
+const dataSourceId = 16 // Query Results
 const queryId = 1
 
 func main() {
@@ -49,4 +51,15 @@ func main() {
 	output6 := client.GetQueryTags()
 	fmt.Println(output6.Body)
 	fmt.Println(output6.StatusCode)
+
+	// PostQueryList()
+	input7 := &redash.PostQueryListInput{
+		DataSourceId: dataSourceId,
+		Query:        "SELECT * FROM sql_" + strconv.Itoa(queryId) + ";",
+		Name:         "sample PostQueryList",
+	}
+
+	output7 := client.PostQueryList(input7)
+	fmt.Println(output7.Body)
+	fmt.Println(output7.StatusCode)
 }
