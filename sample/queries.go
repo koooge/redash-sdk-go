@@ -75,4 +75,13 @@ func main() {
 	output8 := client.PostQuery(input8)
 	fmt.Println(output8.Body)
 	fmt.Println(output8.StatusCode)
+
+	// DeleteQuery()
+	input9 := &redash.DeleteQueryInput{
+		QueryId: queryId7,
+	}
+
+	output9 := client.DeleteQuery(input9)
+	fmt.Println(output9.Body)
+	fmt.Println(output9.StatusCode)
 }

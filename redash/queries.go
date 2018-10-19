@@ -189,3 +189,30 @@ func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput {
 	b, _ := ioutil.ReadAll(resp.Body)
 	return &PostQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
+
+type DeleteQueryInput struct {
+	QueryId int
+}
+
+type DeleteQueryOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) DeleteQuery(input *DeleteQueryInput) *DeleteQueryOutput {
+	path := "/api/queries/" + strconv.Itoa(input.QueryId)
+
+	body, err := json.Marshal(input)
+	if err != nil {
+		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+
+	resp, err := c.Delete(path, string(body))
+	if err != nil {
+		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &DeleteQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
+}
