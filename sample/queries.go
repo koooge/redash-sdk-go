@@ -62,4 +62,17 @@ func main() {
 	output7 := client.PostQueryList(input7)
 	fmt.Println(output7.Body)
 	fmt.Println(output7.StatusCode)
+	queryId7 := output7.QueryId
+
+	// PostQuery()
+	input8 := &redash.PostQueryInput{
+		QueryId:      queryId7,
+		DataSourceId: dataSourceId,
+		Query:        "SELECT * FROM sql_" + strconv.Itoa(queryId) + "|0;",
+		Name:         "sample PostQuery",
+	}
+
+	output8 := client.PostQuery(input8)
+	fmt.Println(output8.Body)
+	fmt.Println(output8.StatusCode)
 }

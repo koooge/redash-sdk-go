@@ -127,8 +127,9 @@ type PostQueryListInput struct {
 }
 
 type PostQueryListOutput struct {
-	Body       string
-	StatusCode int
+	QueryId    int    `json:"id"`
+	Body       string `json:"-"`
+	StatusCode int    `json:"-"`
 }
 
 func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput {
@@ -146,5 +147,45 @@ func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput {
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &PostQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	output := &PostQueryListOutput{
+		Body:       string(b),
+		StatusCode: resp.StatusCode,
+	}
+	if err := json.Unmarshal(b, &output); err != nil {
+		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+
+	return output
+}
+
+type PostQueryInput struct {
+	QueryId      int    `json:"-"`
+	DataSourceId int    `json:"data_source_id"`
+	Query        string `json:"query"`
+	Name         string `json:"name"`
+	Description  string `json:"description,omitempty"`
+	Schedule     string `json:"schedule,omitempty"`
+}
+
+type PostQueryOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput {
+	path := "/api/queries/" + strconv.Itoa(input.QueryId)
+
+	body, err := json.Marshal(input)
+	if err != nil {
+		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+
+	resp, err := c.Post(path, string(body))
+	if err != nil {
+		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &PostQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
