@@ -19,15 +19,12 @@ func (c *Client) GetUser(input *GetUserInput) *GetUserOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetUserOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetUserOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetUserOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetUserOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetUserListOutput struct {
@@ -40,13 +37,10 @@ func (c *Client) GetUserList() *GetUserListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetUserListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetUserListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetUserListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetUserListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

@@ -19,15 +19,12 @@ func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetAlertOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetAlertOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetAlertOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetAlertListOutput struct {
@@ -40,15 +37,12 @@ func (c *Client) GetAlertList() *GetAlertListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetAlertListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetAlertListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetAlertListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetAlertSubscriptionListInput struct {
@@ -65,13 +59,10 @@ func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) 
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetAlertSubscriptionListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetAlertSubscriptionListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertSubscriptionListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetAlertSubscriptionListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

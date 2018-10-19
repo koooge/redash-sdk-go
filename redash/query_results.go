@@ -19,15 +19,12 @@ func (c *Client) GetQueryResult(input *GetQueryResultInput) *GetQueryResultOutpu
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueryResultOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryResultOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryResultOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQueryResultOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetJobInput struct {
@@ -44,13 +41,10 @@ func (c *Client) GetJob(input *GetJobInput) *GetJobOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetJobOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetJobOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetJobOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetJobOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

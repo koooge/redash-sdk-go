@@ -19,15 +19,12 @@ func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetGroupOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetGroupOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetGroupOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetGroupListOutput struct {
@@ -40,15 +37,12 @@ func (c *Client) GetGroupList() *GetGroupListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetGroupListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetGroupMemberListInput struct {
@@ -65,13 +59,10 @@ func (c *Client) GetGroupMemberList(input *GetGroupMemberListInput) *GetGroupMem
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetGroupMemberListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetGroupMemberListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupMemberListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetGroupMemberListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

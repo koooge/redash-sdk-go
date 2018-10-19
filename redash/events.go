@@ -14,13 +14,10 @@ func (c *Client) GetEvents() *GetEventsOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetEventsOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetEventsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetEventsOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetEventsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

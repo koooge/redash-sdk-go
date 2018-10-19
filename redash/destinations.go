@@ -19,15 +19,12 @@ func (c *Client) GetDestination(input *GetDestinationInput) *GetDestinationOutpu
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetDestinationOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDestinationOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDestinationOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetDestinationOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetDestinationListOutput struct {
@@ -40,15 +37,12 @@ func (c *Client) GetDestinationList() *GetDestinationListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetDestinationListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDestinationListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDestinationListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetDestinationListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetDestinationTypeListOutput struct {
@@ -61,13 +55,10 @@ func (c *Client) GetDestinationTypeList() *GetDestinationTypeListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetDestinationTypeListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDestinationTypeListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDestinationTypeListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetDestinationTypeListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

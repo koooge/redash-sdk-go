@@ -19,15 +19,12 @@ func (c *Client) GetQuerySnippet(input *GetQuerySnippetInput) *GetQuerySnippetOu
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQuerySnippetOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQuerySnippetOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQuerySnippetOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQuerySnippetOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQuerySnippetListOutput struct {
@@ -40,13 +37,10 @@ func (c *Client) GetQuerySnippetList() *GetQuerySnippetListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQuerySnippetListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQuerySnippetListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQuerySnippetListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQuerySnippetListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

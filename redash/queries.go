@@ -20,15 +20,12 @@ func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQueryListOutput struct {
@@ -41,15 +38,12 @@ func (c *Client) GetQueryList() *GetQueryListOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryListOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQuerySearchOutput struct {
@@ -62,15 +56,12 @@ func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQuerySearchOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQuerySearchOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQuerySearchOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQuerySearchOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQueryRecentOutput struct {
@@ -83,15 +74,12 @@ func (c *Client) GetQueryRecent() *GetQueryRecentOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueryRecentOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryRecentOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryRecentOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQueryRecentOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetMyQueriesOutput struct {
@@ -104,15 +92,12 @@ func (c *Client) GetMyQueries() *GetMyQueriesOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetMyQueriesOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetMyQueriesOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetMyQueriesOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetMyQueriesOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQueryTagsOutput struct {
@@ -125,15 +110,12 @@ func (c *Client) GetQueryTags() *GetQueryTagsOutput {
 
 	resp, err := c.Get(path)
 	if err != nil {
-		return &GetQueryTagsOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &GetQueryTagsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryTagsOutput{
-		Body:       string(b),
-		StatusCode: resp.StatusCode,
-	}
+	return &GetQueryTagsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type PostQueryListInput struct {
