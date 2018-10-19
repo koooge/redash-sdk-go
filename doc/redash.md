@@ -26,6 +26,12 @@ func NewClient(config *Config) *Client
 func (c *Client) Delete(path string, body string) (*http.Response, error)
 ```
 
+#### func (*Client) DeleteQuery
+
+```go
+func (c *Client) DeleteQuery(input *DeleteQueryInput) *DeleteQueryOutput
+```
+
 #### func (*Client) Get
 
 ```go
@@ -194,6 +200,18 @@ func (c *Client) GetUserList() *GetUserListOutput
 func (c *Client) Post(path string, body string) (*http.Response, error)
 ```
 
+#### func (*Client) PostQuery
+
+```go
+func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput
+```
+
+#### func (*Client) PostQueryList
+
+```go
+func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput
+```
+
 #### func (*Client) Put
 
 ```go
@@ -212,6 +230,25 @@ func (c *Client) Request(httpMethod string, path string, body string) (*http.Res
 type Config struct {
 	EndpointUrl string
 	ApiKey      string
+}
+```
+
+
+#### type DeleteQueryInput
+
+```go
+type DeleteQueryInput struct {
+	QueryId int
+}
+```
+
+
+#### type DeleteQueryOutput
+
+```go
+type DeleteQueryOutput struct {
+	Body       string
+	StatusCode int
 }
 ```
 
@@ -578,6 +615,54 @@ type GetUserListOutput struct {
 
 ```go
 type GetUserOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type PostQueryInput
+
+```go
+type PostQueryInput struct {
+	QueryId      int    `json:"-"`
+	DataSourceId int    `json:"data_source_id"`
+	Query        string `json:"query"`
+	Name         string `json:"name"`
+	Description  string `json:"description,omitempty"`
+	Schedule     string `json:"schedule,omitempty"`
+}
+```
+
+
+#### type PostQueryListInput
+
+```go
+type PostQueryListInput struct {
+	DataSourceId int    `json:"data_source_id"`
+	Query        string `json:"query"`
+	Name         string `json:"name"`
+	Description  string `json:"description,omitempty"`
+	Schedule     string `json:"schedule,omitempty"`
+}
+```
+
+
+#### type PostQueryListOutput
+
+```go
+type PostQueryListOutput struct {
+	QueryId    int    `json:"id"`
+	Body       string `json:"-"`
+	StatusCode int    `json:"-"`
+}
+```
+
+
+#### type PostQueryOutput
+
+```go
+type PostQueryOutput struct {
 	Body       string
 	StatusCode int
 }
