@@ -34,4 +34,8 @@ func main() {
 	output3 := client.GetPublicDashboard(input3)
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
+
+	output4 := client.GetDashboardTags()
+	fmt.Println(output4.Body)
+	fmt.Println(output4.StatusCode)
 }

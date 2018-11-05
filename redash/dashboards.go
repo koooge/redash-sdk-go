@@ -65,3 +65,21 @@ func (c *Client) GetPublicDashboard(input *GetPublicDashboardInput) *GetPublicDa
 	b, _ := ioutil.ReadAll(resp.Body)
 	return &GetPublicDashboardOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
+
+type GetDashboardTagsOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) GetDashboardTags() *GetDashboardTagsOutput {
+	path := "/api/dashboards/tags"
+
+	resp, err := c.Get(path)
+	if err != nil {
+		return &GetDashboardTagsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &GetDashboardTagsOutput{Body: string(b), StatusCode: resp.StatusCode}
+}
