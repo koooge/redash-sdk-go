@@ -56,6 +56,30 @@ func (c *Client) GetAlertList() *GetAlertListOutput
 func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput
 ```
 
+#### func (*Client) GetDashboard
+
+```go
+func (c *Client) GetDashboard(input *GetDashboardInput) *GetDashboardOutput
+```
+
+#### func (*Client) GetDashboardFavoriteList
+
+```go
+func (c *Client) GetDashboardFavoriteList() *GetDashboardFavoriteListOutput
+```
+
+#### func (*Client) GetDashboardList
+
+```go
+func (c *Client) GetDashboardList() *GetDashboardListOutput
+```
+
+#### func (*Client) GetDashboardTags
+
+```go
+func (c *Client) GetDashboardTags() *GetDashboardTagsOutput
+```
+
 #### func (*Client) GetDataSource
 
 ```go
@@ -134,10 +158,22 @@ func (c *Client) GetMyQueries() *GetMyQueriesOutput
 func (c *Client) GetOrganizationSettings() *GetOrganizationSettingsOutput
 ```
 
+#### func (*Client) GetPublicDashboard
+
+```go
+func (c *Client) GetPublicDashboard(input *GetPublicDashboardInput) *GetPublicDashboardOutput
+```
+
 #### func (*Client) GetQuery
 
 ```go
 func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput
+```
+
+#### func (*Client) GetQueryFavoriteList
+
+```go
+func (c *Client) GetQueryFavoriteList() *GetQueryFavoriteListOutput
 ```
 
 #### func (*Client) GetQueryList
@@ -295,6 +331,55 @@ type GetAlertSubscriptionListInput struct {
 
 ```go
 type GetAlertSubscriptionListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDashboardFavoriteListOutput
+
+```go
+type GetDashboardFavoriteListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDashboardInput
+
+```go
+type GetDashboardInput struct {
+	DashboardSlug string
+}
+```
+
+
+#### type GetDashboardListOutput
+
+```go
+type GetDashboardListOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDashboardOutput
+
+```go
+type GetDashboardOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetDashboardTagsOutput
+
+```go
+type GetDashboardTagsOutput struct {
 	Body       string
 	StatusCode int
 }
@@ -479,6 +564,35 @@ type GetMyQueriesOutput struct {
 
 ```go
 type GetOrganizationSettingsOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetPublicDashboardInput
+
+```go
+type GetPublicDashboardInput struct {
+	Token string
+}
+```
+
+
+#### type GetPublicDashboardOutput
+
+```go
+type GetPublicDashboardOutput struct {
+	Body       string
+	StatusCode int
+}
+```
+
+
+#### type GetQueryFavoriteListOutput
+
+```go
+type GetQueryFavoriteListOutput struct {
 	Body       string
 	StatusCode int
 }
