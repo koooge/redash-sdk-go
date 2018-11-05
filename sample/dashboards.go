@@ -8,6 +8,7 @@ import (
 )
 
 const dashboardSlug = "something"
+const token = "somethingToken"
 
 func main() {
 	config := &redash.Config{
@@ -27,4 +28,10 @@ func main() {
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
+	input3 := &redash.GetPublicDashboardInput{
+		Token: token,
+	}
+	output3 := client.GetPublicDashboard(input3)
+	fmt.Println(output3.Body)
+	fmt.Println(output3.StatusCode)
 }
