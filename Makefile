@@ -5,6 +5,9 @@ lint:
 	go tool vet redash
 	gofmt -e -l `find . -name '*go'`
 
+test: get lint
+	go test ./redash/...
+
 doc-deps:
 	go get -u github.com/robertkrimen/godocdown/godocdown
 
@@ -12,4 +15,4 @@ doc: doc-deps
 	rm -rf doc && mkdir doc
 	godocdown redash > doc/redash.md
 
-.PHONY: get lint doc-deps doc
+.PHONY: get lint test doc-deps doc
