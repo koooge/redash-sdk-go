@@ -20,22 +20,10 @@ type Client struct {
 func NewClient(config *Config) *Client
 ```
 
-#### func (*Client) Delete
-
-```go
-func (c *Client) Delete(path string, body string) (*http.Response, error)
-```
-
 #### func (*Client) DeleteQuery
 
 ```go
 func (c *Client) DeleteQuery(input *DeleteQueryInput) *DeleteQueryOutput
-```
-
-#### func (*Client) Get
-
-```go
-func (c *Client) Get(path string) (*http.Response, error)
 ```
 
 #### func (*Client) GetAlert
@@ -230,12 +218,6 @@ func (c *Client) GetUser(input *GetUserInput) *GetUserOutput
 func (c *Client) GetUserList() *GetUserListOutput
 ```
 
-#### func (*Client) Post
-
-```go
-func (c *Client) Post(path string, body string) (*http.Response, error)
-```
-
 #### func (*Client) PostQuery
 
 ```go
@@ -246,18 +228,6 @@ func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput
 
 ```go
 func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput
-```
-
-#### func (*Client) Put
-
-```go
-func (c *Client) Put(path string, body string) (*http.Response, error)
-```
-
-#### func (*Client) Request
-
-```go
-func (c *Client) Request(httpMethod string, path string, body string) (*http.Response, error)
 ```
 
 #### type Config
