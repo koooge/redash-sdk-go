@@ -16,14 +16,15 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	fmt.Println("---GetQuerySnippet()---")
 	input := &redash.GetQuerySnippetInput{
 		QuerySnippetId: querySnippetId,
 	}
-
 	output := client.GetQuerySnippet(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
+	fmt.Println("---GetQuerySnippetList()---")
 	output2 := client.GetQuerySnippetList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
