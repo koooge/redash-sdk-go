@@ -16,7 +16,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	// GetDataSource()
+	fmt.Println("---GetDataSource()---")
 	input := &redash.GetDataSourceInput{
 		DataSourceId: dataSourceId,
 	}
@@ -25,12 +25,12 @@ func main() {
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	// GetDataSourceList()
+	fmt.Println("---GetDataSourceList()---")
 	output2 := client.GetDataSourceList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
-	// GetDataSourceSchema()
+	fmt.Println("---GetDataSourceSchema()---")
 	input3 := &redash.GetDataSourceSchemaInput{
 		DataSourceId: dataSourceId,
 	}
