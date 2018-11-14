@@ -14,10 +14,12 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	fmt.Println("---GetQueryFavoriteList()---")
 	output := client.GetQueryFavoriteList()
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
+	fmt.Println("---GetDashboardFavoriteList()---")
 	output2 := client.GetDashboardFavoriteList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
