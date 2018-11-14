@@ -17,10 +17,12 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
+	fmt.Println("---GetDashboardList()---")
 	output := client.GetDashboardList()
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
+	fmt.Println("---GetDashboard()---")
 	input2 := &redash.GetDashboardInput{
 		DashboardSlug: dashboardSlug,
 	}
@@ -28,6 +30,7 @@ func main() {
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
+	fmt.Println("---GetPublicDashboard()---")
 	input3 := &redash.GetPublicDashboardInput{
 		Token: token,
 	}
@@ -35,6 +38,7 @@ func main() {
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
 
+	fmt.Println("---GetDashboardTags()---")
 	output4 := client.GetDashboardTags()
 	fmt.Println(output4.Body)
 	fmt.Println(output4.StatusCode)
