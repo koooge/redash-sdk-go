@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/koooge/redash-sdk-go/tree/master.svg?style=svg)](https://circleci.com/gh/koooge/redash-sdk-go/tree/master)
+
 # redash-sdk-go
 Redash client in go. Many APIs are still WIP.
 
