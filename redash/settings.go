@@ -12,7 +12,7 @@ type GetOrganizationSettingsOutput struct {
 func (c *Client) GetOrganizationSettings() *GetOrganizationSettingsOutput {
 	path := "/api/settings/organization"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetOrganizationSettingsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

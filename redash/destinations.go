@@ -13,7 +13,7 @@ type GetDestinationListOutput struct {
 func (c *Client) GetDestinationList() *GetDestinationListOutput {
 	path := "/api/destinations"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDestinationListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetDestinationOutput struct {
 func (c *Client) GetDestination(input *GetDestinationInput) *GetDestinationOutput {
 	path := "/api/destinations/" + strconv.Itoa(input.DestinationId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDestinationOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -53,7 +53,7 @@ type GetDestinationTypeListOutput struct {
 func (c *Client) GetDestinationTypeList() *GetDestinationTypeListOutput {
 	path := "/api/destinations/types"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDestinationTypeListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

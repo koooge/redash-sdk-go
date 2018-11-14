@@ -13,7 +13,7 @@ type GetGroupListOutput struct {
 func (c *Client) GetGroupList() *GetGroupListOutput {
 	path := "/api/groups"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetGroupOutput struct {
 func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput {
 	path := "/api/groups/" + strconv.Itoa(input.GroupId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetGroupOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -57,7 +57,7 @@ type GetGroupMemberListOutput struct {
 func (c *Client) GetGroupMemberList(input *GetGroupMemberListInput) *GetGroupMemberListOutput {
 	path := "/api/groups/" + strconv.Itoa(input.GroupId) + "/members"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetGroupMemberListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

@@ -13,7 +13,7 @@ type GetAlertListOutput struct {
 func (c *Client) GetAlertList() *GetAlertListOutput {
 	path := "/api/alerts"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetAlertListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetAlertOutput struct {
 func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput {
 	path := "/api/alerts/" + strconv.Itoa(input.AlertId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetAlertOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -57,7 +57,7 @@ type GetAlertSubscriptionListOutput struct {
 func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput {
 	path := "/api/alerts/" + strconv.Itoa(input.AlertId) + "/subscriptions"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetAlertSubscriptionListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

@@ -14,7 +14,7 @@ type GetQueryListOutput struct {
 func (c *Client) GetQueryList() *GetQueryListOutput {
 	path := "/api/queries"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -36,7 +36,7 @@ type GetQueryOutput struct {
 func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 	path := "/api/queries/" + strconv.Itoa(input.QueryId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -54,7 +54,7 @@ type GetQuerySearchOutput struct {
 func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
 	path := "/api/queries/search"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQuerySearchOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -72,7 +72,7 @@ type GetQueryRecentOutput struct {
 func (c *Client) GetQueryRecent() *GetQueryRecentOutput {
 	path := "/api/queries/recent"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryRecentOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -90,7 +90,7 @@ type GetMyQueriesOutput struct {
 func (c *Client) GetMyQueries() *GetMyQueriesOutput {
 	path := "/api/queries/my"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetMyQueriesOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -108,7 +108,7 @@ type GetQueryTagsOutput struct {
 func (c *Client) GetQueryTags() *GetQueryTagsOutput {
 	path := "/api/queries/tags"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryTagsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -140,7 +140,7 @@ func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput {
 		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 
-	resp, err := c.Post(path, string(body))
+	resp, err := c.post(path, string(body))
 	if err != nil {
 		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -180,7 +180,7 @@ func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput {
 		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 
-	resp, err := c.Post(path, string(body))
+	resp, err := c.post(path, string(body))
 	if err != nil {
 		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -207,7 +207,7 @@ func (c *Client) DeleteQuery(input *DeleteQueryInput) *DeleteQueryOutput {
 		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 
-	resp, err := c.Delete(path, string(body))
+	resp, err := c.delete(path, string(body))
 	if err != nil {
 		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

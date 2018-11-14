@@ -12,7 +12,7 @@ type GetQueryFavoriteListOutput struct {
 func (c *Client) GetQueryFavoriteList() *GetQueryFavoriteListOutput {
 	path := "/api/queries/favorites"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryFavoriteListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -30,7 +30,7 @@ type GetDashboardFavoriteListOutput struct {
 func (c *Client) GetDashboardFavoriteList() *GetDashboardFavoriteListOutput {
 	path := "/api/dashboards/favorites"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDashboardFavoriteListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

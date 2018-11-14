@@ -13,7 +13,7 @@ type GetUserListOutput struct {
 func (c *Client) GetUserList() *GetUserListOutput {
 	path := "/api/users"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetUserListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetUserOutput struct {
 func (c *Client) GetUser(input *GetUserInput) *GetUserOutput {
 	path := "/api/users/" + strconv.Itoa(input.UserId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetUserOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

@@ -13,7 +13,7 @@ type GetQuerySnippetListOutput struct {
 func (c *Client) GetQuerySnippetList() *GetQuerySnippetListOutput {
 	path := "/api/query_snippets"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQuerySnippetListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetQuerySnippetOutput struct {
 func (c *Client) GetQuerySnippet(input *GetQuerySnippetInput) *GetQuerySnippetOutput {
 	path := "/api/query_snippets/" + strconv.Itoa(input.QuerySnippetId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQuerySnippetOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

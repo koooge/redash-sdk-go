@@ -12,7 +12,7 @@ type GetEventsOutput struct {
 func (c *Client) GetEvents() *GetEventsOutput {
 	path := "/api/events"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetEventsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

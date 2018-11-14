@@ -13,7 +13,7 @@ type GetDataSourceListOutput struct {
 func (c *Client) GetDataSourceList() *GetDataSourceListOutput {
 	path := "/api/data_sources"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDataSourceListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -35,7 +35,7 @@ type GetDataSourceOutput struct {
 func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput {
 	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDataSourceOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -57,7 +57,7 @@ type GetDataSourceSchemaOutput struct {
 func (c *Client) GetDataSourceSchema(input *GetDataSourceSchemaInput) *GetDataSourceSchemaOutput {
 	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/schema"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDataSourceSchemaOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

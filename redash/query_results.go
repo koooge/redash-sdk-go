@@ -17,7 +17,7 @@ type GetQueryResultOutput struct {
 func (c *Client) GetQueryResult(input *GetQueryResultInput) *GetQueryResultOutput {
 	path := "/api/query_results/" + strconv.Itoa(input.QueryResultId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetQueryResultOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -39,7 +39,7 @@ type GetJobOutput struct {
 func (c *Client) GetJob(input *GetJobInput) *GetJobOutput {
 	path := "/api/jobs/" + strconv.Itoa(input.JobId)
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetJobOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}

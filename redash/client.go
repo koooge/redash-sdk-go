@@ -16,23 +16,23 @@ func NewClient(config *Config) *Client {
 	return c
 }
 
-func (c *Client) Get(path string) (*http.Response, error) {
-	return c.Request(http.MethodGet, path, "")
+func (c *Client) get(path string) (*http.Response, error) {
+	return c.request(http.MethodGet, path, "")
 }
 
-func (c *Client) Post(path string, body string) (*http.Response, error) {
-	return c.Request(http.MethodPost, path, body)
+func (c *Client) post(path string, body string) (*http.Response, error) {
+	return c.request(http.MethodPost, path, body)
 }
 
-func (c *Client) Put(path string, body string) (*http.Response, error) {
-	return c.Request(http.MethodPut, path, body)
+func (c *Client) put(path string, body string) (*http.Response, error) {
+	return c.request(http.MethodPut, path, body)
 }
 
-func (c *Client) Delete(path string, body string) (*http.Response, error) {
-	return c.Request(http.MethodDelete, path, body)
+func (c *Client) delete(path string, body string) (*http.Response, error) {
+	return c.request(http.MethodDelete, path, body)
 }
 
-func (c *Client) Request(httpMethod string, path string, body string) (*http.Response, error) {
+func (c *Client) request(httpMethod string, path string, body string) (*http.Response, error) {
 	url := c.Config.EndpointUrl + path
 	resp, err := func() (*http.Response, error) {
 		req, err := http.NewRequest(httpMethod, url, strings.NewReader(body))

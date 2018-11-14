@@ -12,7 +12,7 @@ type GetDashboardListOutput struct {
 func (c *Client) GetDashboardList() *GetDashboardListOutput {
 	path := "/api/dashboards"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDashboardListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -34,7 +34,7 @@ type GetDashboardOutput struct {
 func (c *Client) GetDashboard(input *GetDashboardInput) *GetDashboardOutput {
 	path := "/api/dashboards/" + input.DashboardSlug
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDashboardOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -56,7 +56,7 @@ type GetPublicDashboardOutput struct {
 func (c *Client) GetPublicDashboard(input *GetPublicDashboardInput) *GetPublicDashboardOutput {
 	path := "/api/dashboards/public/" + input.Token
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetPublicDashboardOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
@@ -74,7 +74,7 @@ type GetDashboardTagsOutput struct {
 func (c *Client) GetDashboardTags() *GetDashboardTagsOutput {
 	path := "/api/dashboards/tags"
 
-	resp, err := c.Get(path)
+	resp, err := c.get(path)
 	if err != nil {
 		return &GetDashboardTagsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
