@@ -18,7 +18,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	// GetQuery()
+	fmt.Println("---GetQuery()---")
 	input := &redash.GetQueryInput{
 		QueryId: queryId,
 	}
@@ -27,32 +27,32 @@ func main() {
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	// GetQueryList()
+	fmt.Println("---GetQueryList()---")
 	output2 := client.GetQueryList()
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
-	// GetQuerySearch()
+	fmt.Println("---GetQuerySearch()---")
 	output3 := client.GetQuerySearch()
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
 
-	// GetQueryRecent()
+	fmt.Println("---GetQueryRecent()---")
 	output4 := client.GetQueryRecent()
 	fmt.Println(output4.Body)
 	fmt.Println(output4.StatusCode)
 
-	// GetMyQueries()
+	fmt.Println("---GetMyQueries()---")
 	output5 := client.GetMyQueries()
 	fmt.Println(output5.Body)
 	fmt.Println(output5.StatusCode)
 
-	// GetQueryTags()
+	fmt.Println("---GetQueryTags()---")
 	output6 := client.GetQueryTags()
 	fmt.Println(output6.Body)
 	fmt.Println(output6.StatusCode)
 
-	// PostQueryList()
+	fmt.Println("---PostQueryList()---")
 	input7 := &redash.PostQueryListInput{
 		DataSourceId: dataSourceId,
 		Query:        "SELECT * FROM sql_" + strconv.Itoa(queryId) + ";",
@@ -64,7 +64,7 @@ func main() {
 	fmt.Println(output7.StatusCode)
 	queryId7 := output7.QueryId
 
-	// PostQuery()
+	fmt.Println("---PostQuery()---")
 	input8 := &redash.PostQueryInput{
 		QueryId:      queryId7,
 		DataSourceId: dataSourceId,
@@ -76,7 +76,7 @@ func main() {
 	fmt.Println(output8.Body)
 	fmt.Println(output8.StatusCode)
 
-	// DeleteQuery()
+	fmt.Println("---DeleteQuery()---")
 	input9 := &redash.DeleteQueryInput{
 		QueryId: queryId7,
 	}
