@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  go1_11:
+    docker:
+      - image: circleci/golang:1.11
+    working_directory: /go/src/github.com/koooge/redash-sdk-go
+    steps:
+      - checkout
+      - run: make test
+
+workflows:
+  version: 2
+  test_unit:
+    jobs:
+      - go1_11
