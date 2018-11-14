@@ -17,7 +17,7 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	// GetQueryResult()
+	fmt.Println("---GetQueryResult()---")
 	input := &redash.GetQueryResultInput{
 		QueryResultId: queryResultId,
 	}
@@ -26,7 +26,7 @@ func main() {
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	// GetJob()
+	fmt.Println("---GetJob()---")
 	input2 := &redash.GetJobInput{
 		JobId: jobId,
 	}
