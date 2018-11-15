@@ -16,6 +16,10 @@ func NewClient(config *Config) *Client {
 	return c
 }
 
+func (c *Client) SetConfig(config *Config) {
+	c.Config = config
+}
+
 func (c *Client) get(path string) (*http.Response, error) {
 	return c.request(http.MethodGet, path, "")
 }
