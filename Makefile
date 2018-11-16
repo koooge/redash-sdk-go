@@ -6,7 +6,7 @@ lint: get
 	gofmt -e -l `find . -name '*go'`
 
 test: get lint
-	go test ./redash/...
+	go test -v ./redash/...
 
 doc-deps:
 	go get -u github.com/robertkrimen/godocdown/godocdown
