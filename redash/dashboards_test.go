@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetDashboardList(t *testing.T) {
-	const getDashboardListResBody = `{"something":"something","results":[{"something":"something"}]}`
+func TestListDashboards(t *testing.T) {
+	const listDashboardsResBody = `{"something":"something","results":[{"something":"something"}]}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/dashboards" {
-			fmt.Fprint(w, getDashboardListResBody)
+			fmt.Fprint(w, listDashboardsResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetDashboardList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListDashboardsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getDashboardListResBody},
+		{input: nil, status: 200, body: listDashboardsResBody},
+		{input: &ListDashboardsInput{}, status: 200, body: listDashboardsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDashboardList()
+		result := testClient.ListDashboards(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -111,14 +113,16 @@ func TestGetDashboardTags(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetDashboardTagsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getDashboardTagsResBody},
+		{input: nil, status: 200, body: getDashboardTagsResBody},
+		{input: &GetDashboardTagsInput{}, status: 200, body: getDashboardTagsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDashboardTags()
+		result := testClient.GetDashboardTags(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetDestinationList(t *testing.T) {
-	const getDestinationListResBody = `[{"something":"something"}]`
+func TestListDestinations(t *testing.T) {
+	const listDestinationsResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/destinations" {
-			fmt.Fprint(w, getDestinationListResBody)
+			fmt.Fprint(w, listDestinationsResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetDestinationList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListDestinationsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getDestinationListResBody},
+		{input: nil, status: 200, body: listDestinationsResBody},
+		{input: &ListDestinationsInput{}, status: 200, body: listDestinationsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDestinationList()
+		result := testClient.ListDestinations(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -66,12 +68,12 @@ func TestGetDestination(t *testing.T) {
 	}
 }
 
-func TestGetDestinationTypeList(t *testing.T) {
-	const getDestinationTypeListResBody = `[{"something":"something"}]`
+func TestListDestinationTypes(t *testing.T) {
+	const listDestinationTypesResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/destinations/types" {
-			fmt.Fprint(w, getDestinationTypeListResBody)
+			fmt.Fprint(w, listDestinationTypesResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -81,14 +83,16 @@ func TestGetDestinationTypeList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListDestinationTypesInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getDestinationTypeListResBody},
+		{input: nil, status: 200, body: listDestinationTypesResBody},
+		{input: &ListDestinationTypesInput{}, status: 200, body: listDestinationTypesResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDestinationTypeList()
+		result := testClient.ListDestinationTypes(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

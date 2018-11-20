@@ -4,12 +4,15 @@ import (
 	"io/ioutil"
 )
 
+type GetEventsInput struct {
+}
+
 type GetEventsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetEvents() *GetEventsOutput {
+func (c *Client) GetEvents(_ *GetEventsInput) *GetEventsOutput {
 	path := "/api/events"
 
 	resp, err := c.get(path)

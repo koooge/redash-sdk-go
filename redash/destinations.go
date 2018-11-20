@@ -5,22 +5,25 @@ import (
 	"strconv"
 )
 
-type GetDestinationListOutput struct {
+type ListDestinationsInput struct {
+}
+
+type ListDestinationsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDestinationList() *GetDestinationListOutput {
+func (c *Client) ListDestinations(_ *ListDestinationsInput) *ListDestinationsOutput {
 	path := "/api/destinations"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetDestinationListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListDestinationsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDestinationListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListDestinationsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetDestinationInput struct {
@@ -45,20 +48,23 @@ func (c *Client) GetDestination(input *GetDestinationInput) *GetDestinationOutpu
 	return &GetDestinationOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
-type GetDestinationTypeListOutput struct {
+type ListDestinationTypesInput struct {
+}
+
+type ListDestinationTypesOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDestinationTypeList() *GetDestinationTypeListOutput {
+func (c *Client) ListDestinationTypes(_ *ListDestinationTypesInput) *ListDestinationTypesOutput {
 	path := "/api/destinations/types"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetDestinationTypeListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListDestinationTypesOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDestinationTypeListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListDestinationTypesOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

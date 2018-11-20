@@ -4,12 +4,15 @@ import (
 	"io/ioutil"
 )
 
+type GetOrganizationSettingsInput struct {
+}
+
 type GetOrganizationSettingsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetOrganizationSettings() *GetOrganizationSettingsOutput {
+func (c *Client) GetOrganizationSettings(_ *GetOrganizationSettingsInput) *GetOrganizationSettingsOutput {
 	path := "/api/settings/organization"
 
 	resp, err := c.get(path)

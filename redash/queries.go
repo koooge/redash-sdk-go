@@ -6,22 +6,25 @@ import (
 	"strconv"
 )
 
-type GetQueryListOutput struct {
+type ListQueriesInput struct {
+}
+
+type ListQueriesOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetQueryList() *GetQueryListOutput {
+func (c *Client) ListQueries(_ *ListQueriesInput) *ListQueriesOutput {
 	path := "/api/queries"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListQueriesOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetQueryListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListQueriesOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetQueryInput struct {
@@ -46,12 +49,15 @@ func (c *Client) GetQuery(input *GetQueryInput) *GetQueryOutput {
 	return &GetQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
+type GetQuerySearchInput struct {
+}
+
 type GetQuerySearchOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
+func (c *Client) GetQuerySearch(_ *GetQuerySearchInput) *GetQuerySearchOutput {
 	path := "/api/queries/search"
 
 	resp, err := c.get(path)
@@ -64,12 +70,15 @@ func (c *Client) GetQuerySearch() *GetQuerySearchOutput {
 	return &GetQuerySearchOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
+type GetQueryRecentInput struct {
+}
+
 type GetQueryRecentOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetQueryRecent() *GetQueryRecentOutput {
+func (c *Client) GetQueryRecent(_ *GetQueryRecentInput) *GetQueryRecentOutput {
 	path := "/api/queries/recent"
 
 	resp, err := c.get(path)
@@ -82,12 +91,15 @@ func (c *Client) GetQueryRecent() *GetQueryRecentOutput {
 	return &GetQueryRecentOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
+type GetMyQueriesInput struct {
+}
+
 type GetMyQueriesOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetMyQueries() *GetMyQueriesOutput {
+func (c *Client) GetMyQueries(_ *GetMyQueriesInput) *GetMyQueriesOutput {
 	path := "/api/queries/my"
 
 	resp, err := c.get(path)
@@ -100,12 +112,15 @@ func (c *Client) GetMyQueries() *GetMyQueriesOutput {
 	return &GetMyQueriesOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
+type GetQueryTagsInput struct {
+}
+
 type GetQueryTagsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetQueryTags() *GetQueryTagsOutput {
+func (c *Client) GetQueryTags(_ *GetQueryTagsInput) *GetQueryTagsOutput {
 	path := "/api/queries/tags"
 
 	resp, err := c.get(path)
@@ -118,7 +133,7 @@ func (c *Client) GetQueryTags() *GetQueryTagsOutput {
 	return &GetQueryTagsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
-type PostQueryListInput struct {
+type CreateQueryInput struct {
 	DataSourceId int    `json:"data_source_id"`
 	Query        string `json:"query"`
 	Name         string `json:"name"`
@@ -126,39 +141,39 @@ type PostQueryListInput struct {
 	Schedule     string `json:"schedule,omitempty"`
 }
 
-type PostQueryListOutput struct {
+type CreateQueryOutput struct {
 	QueryId    int    `json:"id"`
 	Body       string `json:"-"`
 	StatusCode int    `json:"-"`
 }
 
-func (c *Client) PostQueryList(input *PostQueryListInput) *PostQueryListOutput {
+func (c *Client) CreateQuery(input *CreateQueryInput) *CreateQueryOutput {
 	path := "/api/queries"
 
 	body, err := json.Marshal(input)
 	if err != nil {
-		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &CreateQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 
 	resp, err := c.post(path, string(body))
 	if err != nil {
-		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &CreateQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	output := &PostQueryListOutput{
+	output := &CreateQueryOutput{
 		Body:       string(b),
 		StatusCode: resp.StatusCode,
 	}
 	if err := json.Unmarshal(b, &output); err != nil {
-		return &PostQueryListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &CreateQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 
 	return output
 }
 
-type PostQueryInput struct {
+type ModifyQueryInput struct {
 	QueryId      int    `json:"-"`
 	DataSourceId int    `json:"data_source_id"`
 	Query        string `json:"query"`
@@ -167,27 +182,27 @@ type PostQueryInput struct {
 	Schedule     string `json:"schedule,omitempty"`
 }
 
-type PostQueryOutput struct {
+type ModifyQueryOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) PostQuery(input *PostQueryInput) *PostQueryOutput {
+func (c *Client) ModifyQuery(input *ModifyQueryInput) *ModifyQueryOutput {
 	path := "/api/queries/" + strconv.Itoa(input.QueryId)
 
 	body, err := json.Marshal(input)
 	if err != nil {
-		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
+		return &ModifyQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
 	}
 
 	resp, err := c.post(path, string(body))
 	if err != nil {
-		return &PostQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ModifyQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &PostQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ModifyQueryOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type DeleteQueryInput struct {

@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetQuerySnippetList(t *testing.T) {
-	const getQuerySnippetListResBody = `[{"something":"something"}]`
+func TestListQuerySnippets(t *testing.T) {
+	const listQuerySnippetsResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/query_snippets" {
-			fmt.Fprint(w, getQuerySnippetListResBody)
+			fmt.Fprint(w, listQuerySnippetsResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetQuerySnippetList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListQuerySnippetsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getQuerySnippetListResBody},
+		{input: nil, status: 200, body: listQuerySnippetsResBody},
+		{input: &ListQuerySnippetsInput{}, status: 200, body: listQuerySnippetsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetQuerySnippetList()
+		result := testClient.ListQuerySnippets(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

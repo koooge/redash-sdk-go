@@ -5,7 +5,7 @@ type IClient interface {
 	SetConfig(*Config)
 
 	// alerts
-	ListAlerts(*ListAlertsInput) *ListAlertOutput
+	ListAlerts(*ListAlertsInput) *ListAlertsOutput
 	GetAlert(*GetAlertInput) *GetAlertOutput
 	ListAlertSubscriptions(*ListAlertSubscriptionsInput) *ListAlertSubscriptionsOutput
 
@@ -21,7 +21,7 @@ type IClient interface {
 	GetDataSourceSchema(*GetDataSourceSchemaInput) *GetDataSourceSchemaOutput
 
 	// destinations
-	ListDestinations(*ListDestinationsInput) *ListDestinationOutput
+	ListDestinations(*ListDestinationsInput) *ListDestinationsOutput
 	GetDestination(*GetDestinationInput) *GetDestinationOutput
 	ListDestinationTypes(*ListDestinationTypesInput) *ListDestinationTypesOutput
 
@@ -30,7 +30,7 @@ type IClient interface {
 
 	// favorites
 	ListQueryFavorites(*ListQueryFavoritesInput) *ListQueryFavoritesOutput
-	ListGetDashboardFavorites(*ListGetDashboardFavoritesInput) *ListDashboardFavoritesOutput
+	ListDashboardFavorites(*ListDashboardFavoritesInput) *ListDashboardFavoritesOutput
 
 	// groups
 	ListGroups(*ListGroupsInput) *ListGroupsOutput
@@ -44,7 +44,7 @@ type IClient interface {
 	GetQueryRecent(*GetQueryRecentInput) *GetQueryRecentOutput
 	GetMyQueries(*GetMyQueriesInput) *GetMyQueriesOutput
 	GetQueryTags(*GetQueryTagsInput) *GetQueryTagsOutput
-	PostQuery(*PostQueryInput) *PostQueryOutput
+	CreateQuery(*CreateQueryInput) *CreateQueryOutput
 	ModifyQuery(*ModifyQueryInput) *ModifyQueryOutput
 	DeleteQuery(*DeleteQueryInput) *DeleteQueryOutput
 
@@ -60,6 +60,6 @@ type IClient interface {
 	GetOrganizationSettings(*GetOrganizationSettingsInput) *GetOrganizationSettingsOutput
 
 	// users
-	ListUsers(*ListUsersInput) *GetUserListOutput
+	ListUsers(*ListUsersInput) *ListUsersOutput
 	GetUser(*GetUserInput) *GetUserOutput
 }

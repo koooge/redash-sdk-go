@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetDataSourceList(t *testing.T) {
-	const getDataSourceListResBody = `[{"something":"something"}]`
+func TestListDataSources(t *testing.T) {
+	const listDataSourcesResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/data_sources" {
-			fmt.Fprint(w, getDataSourceListResBody)
+			fmt.Fprint(w, listDataSourcesResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetDataSourceList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListDataSourcesInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getDataSourceListResBody},
+		{input: nil, status: 200, body: listDataSourcesResBody},
+		{input: &ListDataSourcesInput{}, status: 200, body: listDataSourcesResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDataSourceList()
+		result := testClient.ListDataSources(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

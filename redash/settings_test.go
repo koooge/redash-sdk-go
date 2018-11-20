@@ -22,14 +22,16 @@ func TestGetOrganizationSettings(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetOrganizationSettingsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getOrganizationSettingsResBody},
+		{input: nil, status: 200, body: getOrganizationSettingsResBody},
+		{input: &GetOrganizationSettingsInput{}, status: 200, body: getOrganizationSettingsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetOrganizationSettings()
+		result := testClient.GetOrganizationSettings(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

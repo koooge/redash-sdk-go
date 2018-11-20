@@ -5,22 +5,25 @@ import (
 	"strconv"
 )
 
-type GetAlertListOutput struct {
+type ListAlertsInput struct {
+}
+
+type ListAlertsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetAlertList() *GetAlertListOutput {
+func (c *Client) ListAlerts(_ *ListAlertsInput) *ListAlertsOutput {
 	path := "/api/alerts"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetAlertListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListAlertsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListAlertsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetAlertInput struct {
@@ -45,24 +48,24 @@ func (c *Client) GetAlert(input *GetAlertInput) *GetAlertOutput {
 	return &GetAlertOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
-type GetAlertSubscriptionListInput struct {
+type ListAlertSubscriptionsInput struct {
 	AlertId int
 }
 
-type GetAlertSubscriptionListOutput struct {
+type ListAlertSubscriptionsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetAlertSubscriptionList(input *GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput {
+func (c *Client) ListAlertSubscriptions(input *ListAlertSubscriptionsInput) *ListAlertSubscriptionsOutput {
 	path := "/api/alerts/" + strconv.Itoa(input.AlertId) + "/subscriptions"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetAlertSubscriptionListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListAlertSubscriptionsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetAlertSubscriptionListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListAlertSubscriptionsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

@@ -5,22 +5,25 @@ import (
 	"strconv"
 )
 
-type GetGroupListOutput struct {
+type ListGroupsInput struct {
+}
+
+type ListGroupsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetGroupList() *GetGroupListOutput {
+func (c *Client) ListGroups(_ *ListGroupsInput) *ListGroupsOutput {
 	path := "/api/groups"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetGroupListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListGroupsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListGroupsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetGroupInput struct {
@@ -45,24 +48,24 @@ func (c *Client) GetGroup(input *GetGroupInput) *GetGroupOutput {
 	return &GetGroupOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
-type GetGroupMemberListInput struct {
+type ListGroupMembersInput struct {
 	GroupId int
 }
 
-type GetGroupMemberListOutput struct {
+type ListGroupMembersOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetGroupMemberList(input *GetGroupMemberListInput) *GetGroupMemberListOutput {
+func (c *Client) ListGroupMembers(input *ListGroupMembersInput) *ListGroupMembersOutput {
 	path := "/api/groups/" + strconv.Itoa(input.GroupId) + "/members"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetGroupMemberListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListGroupMembersOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetGroupMemberListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListGroupMembersOutput{Body: string(b), StatusCode: resp.StatusCode}
 }

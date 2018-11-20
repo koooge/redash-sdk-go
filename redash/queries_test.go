@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetQueryList(t *testing.T) {
-	const getQueryListResBody = `{"something":"something","results":[{"something":"something"}]}`
+func TestListQueries(t *testing.T) {
+	const listQueriesResBody = `{"something":"something","results":[{"something":"something"}]}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/queries" {
-			fmt.Fprint(w, getQueryListResBody)
+			fmt.Fprint(w, listQueriesResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetQueryList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListQueriesInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getQueryListResBody},
+		{input: nil, status: 200, body: listQueriesResBody},
+		{input: &ListQueriesInput{}, status: 200, body: listQueriesResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetQueryList()
+		result := testClient.ListQueries(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -81,14 +83,16 @@ func TestGetQuerySearch(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetQuerySearchInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getQuerySearchResBody},
+		{input: nil, status: 200, body: getQuerySearchResBody},
+		{input: &GetQuerySearchInput{}, status: 200, body: getQuerySearchResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetQuerySearch()
+		result := testClient.GetQuerySearch(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -110,14 +114,16 @@ func TestGetQueryRecent(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetQueryRecentInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getQueryRecentResBody},
+		{input: nil, status: 200, body: getQueryRecentResBody},
+		{input: &GetQueryRecentInput{}, status: 200, body: getQueryRecentResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetQueryRecent()
+		result := testClient.GetQueryRecent(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -139,14 +145,16 @@ func TestGetMyQueries(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetMyQueriesInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getMyQueriesResBody},
+		{input: nil, status: 200, body: getMyQueriesResBody},
+		{input: &GetMyQueriesInput{}, status: 200, body: getMyQueriesResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetMyQueries()
+		result := testClient.GetMyQueries(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -168,26 +176,28 @@ func TestGetQueryTags(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetQueryTagsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getQueryTagsResBody},
+		{input: nil, status: 200, body: getQueryTagsResBody},
+		{input: &GetQueryTagsInput{}, status: 200, body: getQueryTagsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetQueryTags()
+		result := testClient.GetQueryTags(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
 	}
 }
 
-func TestPostQueryList(t *testing.T) {
-	const postQueryListResBody = `{"something":"something"}`
+func TestCreateQuery(t *testing.T) {
+	const createQueryResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/queries" {
-			fmt.Fprint(w, postQueryListResBody)
+			fmt.Fprint(w, createQueryResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -197,27 +207,27 @@ func TestPostQueryList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
-		input  *PostQueryListInput
+		input  *CreateQueryInput
 		status int
 		body   string
 	}{
-		{input: &PostQueryListInput{DataSourceId: 1, Query: "something", Name: "something"}, status: 200, body: postQueryListResBody},
+		{input: &CreateQueryInput{DataSourceId: 1, Query: "something", Name: "something"}, status: 200, body: createQueryResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.PostQueryList(c.input)
+		result := testClient.CreateQuery(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
 	}
 }
 
-func TestPostQuery(t *testing.T) {
-	const postQueryResBody = `{"something":"something"}`
+func TestModifyQuery(t *testing.T) {
+	const modifyQueryResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/queries/1" {
-			fmt.Fprint(w, postQueryResBody)
+			fmt.Fprint(w, modifyQueryResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -227,15 +237,15 @@ func TestPostQuery(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
-		input  *PostQueryInput
+		input  *ModifyQueryInput
 		status int
 		body   string
 	}{
-		{input: &PostQueryInput{QueryId: 1, DataSourceId: 1, Query: "something", Name: "something"}, status: 200, body: postQueryResBody},
+		{input: &ModifyQueryInput{QueryId: 1, DataSourceId: 1, Query: "something", Name: "something"}, status: 200, body: modifyQueryResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.PostQuery(c.input)
+		result := testClient.ModifyQuery(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

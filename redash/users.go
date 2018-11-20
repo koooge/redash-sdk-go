@@ -5,22 +5,25 @@ import (
 	"strconv"
 )
 
-type GetUserListOutput struct {
+type ListUsersInput struct {
+}
+
+type ListUsersOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetUserList() *GetUserListOutput {
+func (c *Client) ListUsers(_ *ListUsersInput) *ListUsersOutput {
 	path := "/api/users"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetUserListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListUsersOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetUserListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListUsersOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetUserInput struct {

@@ -7,12 +7,12 @@ import (
 	"testing"
 )
 
-func TestGetGroupList(t *testing.T) {
-	const getGroupListResBody = `[{"something":"something"}]`
+func TestListGroups(t *testing.T) {
+	const listGroupsResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/groups" {
-			fmt.Fprint(w, getGroupListResBody)
+			fmt.Fprint(w, listGroupsResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -22,14 +22,16 @@ func TestGetGroupList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *ListGroupsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getGroupListResBody},
+		{input: nil, status: 200, body: listGroupsResBody},
+		{input: &ListGroupsInput{}, status: 200, body: listGroupsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetGroupList()
+		result := testClient.ListGroups(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
@@ -66,12 +68,12 @@ func TestGetGroup(t *testing.T) {
 	}
 }
 
-func TestGetGroupMemberList(t *testing.T) {
-	const getGroupMemberListResBody = `[{"something":"something"}]`
+func TestListGroupMembers(t *testing.T) {
+	const listGroupMembersResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/api/groups/1/members" {
-			fmt.Fprint(w, getGroupMemberListResBody)
+			fmt.Fprint(w, listGroupMembersResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -81,15 +83,15 @@ func TestGetGroupMemberList(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
-		input  *GetGroupMemberListInput
+		input  *ListGroupMembersInput
 		status int
 		body   string
 	}{
-		{input: &GetGroupMemberListInput{GroupId: 1}, status: 200, body: getGroupMemberListResBody},
+		{input: &ListGroupMembersInput{GroupId: 1}, status: 200, body: listGroupMembersResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetGroupMemberList(c.input)
+		result := testClient.ListGroupMembers(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

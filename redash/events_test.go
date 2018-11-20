@@ -22,14 +22,16 @@ func TestGetEvents(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
+		input  *GetEventsInput
 		status int
 		body   string
 	}{
-		{status: 200, body: getEventsResBody},
+		{input: nil, status: 200, body: getEventsResBody},
+		{input: &GetEventsInput{}, status: 200, body: getEventsResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetEvents()
+		result := testClient.GetEvents(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

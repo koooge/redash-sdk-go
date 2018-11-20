@@ -4,22 +4,25 @@ import (
 	"io/ioutil"
 )
 
-type GetDashboardListOutput struct {
+type ListDashboardsInput struct {
+}
+
+type ListDashboardsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDashboardList() *GetDashboardListOutput {
+func (c *Client) ListDashboards(_ *ListDashboardsInput) *ListDashboardsOutput {
 	path := "/api/dashboards"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetDashboardListOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
+		return &ListDashboardsOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDashboardListOutput{Body: string(b), StatusCode: resp.StatusCode}
+	return &ListDashboardsOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
 type GetDashboardInput struct {
@@ -66,12 +69,15 @@ func (c *Client) GetPublicDashboard(input *GetPublicDashboardInput) *GetPublicDa
 	return &GetPublicDashboardOutput{Body: string(b), StatusCode: resp.StatusCode}
 }
 
+type GetDashboardTagsInput struct {
+}
+
 type GetDashboardTagsOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDashboardTags() *GetDashboardTagsOutput {
+func (c *Client) GetDashboardTags(_ *GetDashboardTagsInput) *GetDashboardTagsOutput {
 	path := "/api/dashboards/tags"
 
 	resp, err := c.get(path)
