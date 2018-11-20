@@ -15,7 +15,7 @@ func main() {
 	client := redash.NewClient(config)
 
 	fmt.Println("---GetOrganizationSettings()---")
-	output := client.GetOrganizationSettings()
+	output := client.GetOrganizationSettings(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

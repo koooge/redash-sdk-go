@@ -16,16 +16,17 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	fmt.Println("---GetUser()---")
-	input := &redash.GetUserInput{
-		UserId: userId,
-	}
-	output := client.GetUser(input)
+	fmt.Println("---ListUsers()---")
+	output := client.ListUsers(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	fmt.Println("---GetUserList()---")
-	output2 := client.GetUserList()
+	fmt.Println("---GetUser()---")
+	input2 := &redash.GetUserInput{
+		UserId: userId,
+	}
+	output2 := client.GetUser(input2)
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
+
 }

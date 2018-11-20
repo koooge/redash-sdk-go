@@ -16,22 +16,21 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	fmt.Println("---GetDestination()---")
-	input := &redash.GetDestinationInput{
-		DestinationId: destinationId,
-	}
-
-	output := client.GetDestination(input)
+	fmt.Println("---ListDestinations()---")
+	output := client.ListDestinations(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	fmt.Println("---GetDestinationList()---")
-	output2 := client.GetDestinationList()
+	fmt.Println("---GetDestination()---")
+	input2 := &redash.GetDestinationInput{
+		DestinationId: destinationId,
+	}
+	output2 := client.GetDestination(input2)
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
 	fmt.Println("---GetDestinationTypeList()---")
-	output3 := client.GetDestinationTypeList()
+	output3 := client.ListDestinationTypes(nil)
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
 }

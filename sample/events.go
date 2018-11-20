@@ -15,7 +15,7 @@ func main() {
 	client := redash.NewClient(config)
 
 	fmt.Println("---GetEvents()---")
-	output := client.GetEvents()
+	output := client.GetEvents(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 }

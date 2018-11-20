@@ -17,26 +17,24 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	fmt.Println("---GetAlert()---")
-	input := &redash.GetAlertInput{
-		AlertId: alertId,
-	}
-
-	output := client.GetAlert(input)
+	fmt.Println("---ListAlerts()---")
+	output := client.ListAlerts(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
-	fmt.Println("---GetAlertList()---")
-	output2 := client.GetAlertList()
+	fmt.Println("---GetAlert()---")
+	input2 := &redash.GetAlertInput{
+		AlertId: alertId,
+	}
+	output2 := client.GetAlert(input2)
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)
 
-	fmt.Println("---GetAlertSubscriptionList()---")
-	input3 := &redash.GetAlertSubscriptionListInput{
+	fmt.Println("---ListAlertSubscriptions()---")
+	input3 := &redash.ListAlertSubscriptionsInput{
 		AlertId: alertId,
 	}
-
-	output3 := client.GetAlertSubscriptionList(input3)
+	output3 := client.ListAlertSubscriptions(input3)
 	fmt.Println(output3.Body)
 	fmt.Println(output3.StatusCode)
 }

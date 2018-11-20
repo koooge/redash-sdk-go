@@ -21,7 +21,6 @@ func main() {
 	input := &redash.GetQueryResultInput{
 		QueryResultId: queryResultId,
 	}
-
 	output := client.GetQueryResult(input)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
@@ -30,7 +29,6 @@ func main() {
 	input2 := &redash.GetJobInput{
 		JobId: jobId,
 	}
-
 	output2 := client.GetJob(input2)
 	fmt.Println(output2.Body)
 	fmt.Println(output2.StatusCode)

@@ -17,8 +17,8 @@ func main() {
 	}
 	client := redash.NewClient(config)
 
-	fmt.Println("---GetDashboardList()---")
-	output := client.GetDashboardList()
+	fmt.Println("---ListDashboards()---")
+	output := client.ListDashboards(nil)
 	fmt.Println(output.Body)
 	fmt.Println(output.StatusCode)
 
@@ -39,7 +39,7 @@ func main() {
 	fmt.Println(output3.StatusCode)
 
 	fmt.Println("---GetDashboardTags()---")
-	output4 := client.GetDashboardTags()
+	output4 := client.GetDashboardTags(nil)
 	fmt.Println(output4.Body)
 	fmt.Println(output4.StatusCode)
 }
