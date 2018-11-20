@@ -5,47 +5,47 @@ type IClient interface {
 	SetConfig(*Config)
 
 	// alerts
-	GetAlertList() *GetAlertListOutput
+	ListAlerts(*ListAlertsInput) *ListAlertOutput
 	GetAlert(*GetAlertInput) *GetAlertOutput
-	GetAlertSubscriptionList(*GetAlertSubscriptionListInput) *GetAlertSubscriptionListOutput
+	ListAlertSubscriptions(*ListAlertSubscriptionsInput) *ListAlertSubscriptionsOutput
 
 	// dashboards
-	GetDashboardList() *GetDashboardListOutput
+	ListDashboards(*ListDashboardsInput) *ListDashboardsOutput
 	GetDashboard(*GetDashboardInput) *GetDashboardOutput
 	GetPublicDashboard(*GetPublicDashboardInput) *GetPublicDashboardOutput
-	GetDashboardTags() *GetDashboardTagsOutput
+	GetDashboardTags(*GetDashboardTagsInput) *GetDashboardTagsOutput
 
 	// data_sources
-	GetDataSourceList() *GetDataSourceListOutput
+	ListDataSources(*ListDataSourcesInput) *ListDataSourcesOutput
 	GetDataSource(*GetDataSourceInput) *GetDataSourceOutput
 	GetDataSourceSchema(*GetDataSourceSchemaInput) *GetDataSourceSchemaOutput
 
 	// destinations
-	GetDestinationList() *GetDestinationListOutput
+	ListDestinations(*ListDestinationsInput) *ListDestinationOutput
 	GetDestination(*GetDestinationInput) *GetDestinationOutput
-	GetDestinationTypeList() *GetDestinationTypeListOutput
+	ListDestinationTypes(*ListDestinationTypesInput) *ListDestinationTypesOutput
 
 	// events
-	GetEvents() *GetEventsOutput
+	GetEvents(*GetEventsInput) *GetEventsOutput
 
 	// favorites
-	GetQueryFavoriteList() *GetQueryFavoriteListOutput
-	GetDashboardFavoriteList() *GetDashboardFavoriteListOutput
+	ListQueryFavorites(*ListQueryFavoritesInput) *ListQueryFavoritesOutput
+	ListGetDashboardFavorites(*ListGetDashboardFavoritesInput) *ListDashboardFavoritesOutput
 
 	// groups
-	GetGroupList() *GetGroupListOutput
+	ListGroups(*ListGroupsInput) *ListGroupsOutput
 	GetGroup(*GetGroupInput) *GetGroupOutput
-	GetGroupMemberList(*GetGroupMemberListInput) *GetGroupMemberListOutput
+	ListGroupMembers(*ListGroupMembersInput) *ListGroupMembersOutput
 
 	// queries
-	GetQueryList() *GetQueryListOutput
+	ListQueries(*ListQueriesInput) *ListQueriesOutput
 	GetQuery(*GetQueryInput) *GetQueryOutput
-	GetQuerySearch() *GetQuerySearchOutput
-	GetQueryRecent() *GetQueryRecentOutput
-	GetMyQueries() *GetMyQueriesOutput
-	GetQueryTags() *GetQueryTagsOutput
-	PostQueryList(*PostQueryListInput) *PostQueryListOutput
+	GetQuerySearch(*GetQuerySearchInput) *GetQuerySearchOutput
+	GetQueryRecent(*GetQueryRecentInput) *GetQueryRecentOutput
+	GetMyQueries(*GetMyQueriesInput) *GetMyQueriesOutput
+	GetQueryTags(*GetQueryTagsInput) *GetQueryTagsOutput
 	PostQuery(*PostQueryInput) *PostQueryOutput
+	ModifyQuery(*ModifyQueryInput) *ModifyQueryOutput
 	DeleteQuery(*DeleteQueryInput) *DeleteQueryOutput
 
 	// query_results
@@ -53,13 +53,13 @@ type IClient interface {
 	GetJob(*GetJobInput) *GetJobOutput
 
 	// query_snippets
-	GetQuerySnippetList() *GetQuerySnippetListOutput
+	ListQuerySnippets(*ListQuerySnippetsInput) *ListQuerySnippetsOutput
 	GetQuerySnippet(*GetQuerySnippetInput) *GetQuerySnippetOutput
 
 	// settings
-	GetOrganizationSettings() *GetOrganizationSettingsOutput
+	GetOrganizationSettings(*GetOrganizationSettingsInput) *GetOrganizationSettingsOutput
 
 	// users
-	GetUserList() *GetUserListOutput
+	ListUsers(*ListUsersInput) *GetUserListOutput
 	GetUser(*GetUserInput) *GetUserOutput
 }
