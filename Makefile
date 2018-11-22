@@ -8,6 +8,10 @@ lint: get
 test: get lint
 	go test -v -cover ./redash/...
 
+coverage: get
+	go test -coverprofile=cover.out -covermode=count ./redash/...
+	go tool cover -html=cover.out
+
 doc-deps:
 	go get -u github.com/robertkrimen/godocdown/godocdown
 
