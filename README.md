@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/koooge/redash-sdk-go/tree/master.svg?style=svg)](https://circleci.com/gh/koooge/redash-sdk-go/tree/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/hv0ofxbhjf5flstm/branch/master?svg=true)](https://ci.appveyor.com/project/koooge/redash-sdk-go/branch/master)
 
 # redash-sdk-go
 Redash client in go. Many APIs are still WIP.
