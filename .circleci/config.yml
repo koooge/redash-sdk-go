@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   go1_11:
     docker:
@@ -7,20 +8,29 @@ jobs:
     steps:
       - checkout
       - run: make test
+  codeclimate:
+    docker:
+      - image: circleci/golang:1.11
+    working_directory: /go/src/github.com/koooge/redash-sdk-go
+    steps:
+      - checkout
       - run:
           name: Install Code Climate Test Reporter
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
+      - run: make coverage
       - run:
           name: Code Climate Test Coverage
           command: |
-            go test -coverprofile=cover.out -covermode=count ./redash/...
             ./cc-test-reporter format-coverage -t gocov -o "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json" cover.out
-            ./cc-test-reporter upload-coverage -i "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json" --id ${REDASH_SDK_GO_CC_TEST_REPORTER_ID}
+            ./cc-test-reporter upload-coverage -i "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json"
 
 workflows:
   version: 2
   test_unit:
     jobs:
       - go1_11
+  coverage:
+    jobs:
+      - codeclimate
