@@ -2,6 +2,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/hv0ofxbhjf5flstm/branch/master?svg=true)](https://ci.appveyor.com/project/koooge/redash-sdk-go/branch/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/maintainability)](https://codeclimate.com/github/koooge/redash-sdk-go/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/test_coverage)](https://codeclimate.com/github/koooge/redash-sdk-go/test_coverage)
+[![Go Report Card](https://goreportcard.com/badge/github.com/koooge/redash-sdk-go)](https://goreportcard.com/report/github.com/koooge/redash-sdk-go)
 [![GoDoc](https://godoc.org/github.com/koooge/redash-sdk-go?status.svg)](https://godoc.org/github.com/koooge/redash-sdk-go/redash)
 
 # redash-sdk-go
