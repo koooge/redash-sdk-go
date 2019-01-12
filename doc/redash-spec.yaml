@@ -74,6 +74,24 @@ paths:
                     items: {}
   /api/users:
     get:
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+        - in: query
+          name: q
+          schema:
+            type: string
+        - in: query
+          name: disabled
+          schema:
+            type: boolean
+          allowEmptyValue: true
       responses:
         200:
           description: OK
@@ -144,7 +162,10 @@ paths:
                   type: string
                 email:
                   type: string
-                  format: email
+                  format: emai
+              required:
+                - name
+                - email
       responses:
         200:
           description: OK
