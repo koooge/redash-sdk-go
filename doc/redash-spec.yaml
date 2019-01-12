@@ -13,3 +13,62 @@ paths:
               schema:
                 type: string
                 example: PONG.
+  /status.json:
+    get:
+      responses:
+        200:
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboards_count:
+                    type: integer
+                  database_metrics:
+                    type: object
+                    properties:
+                      metrics:
+                        type: array
+                        items:
+                          type: array
+                          items:
+                            oneOf:
+                              - type: string
+                              - type: integer
+                  manager:
+                    type: object
+                    properties:
+                      last_refresh_at:
+                        type: string
+                      outdated_queries_count:
+                        type: string
+                      query_ids:
+                        type: string
+                      queues:
+                        type: object
+                        properties:
+                          celery:
+                            type: object
+                            properties:
+                              data_sources:
+                                type: string
+                              size:
+                                type: integer
+                  queries_count:
+                    type: integer
+                  query_results_count:
+                    type: integer
+                  redis_used_memory:
+                    type: integer
+                  redis_used_memory_human:
+                    type: string
+                  unused_query_results_count:
+                    type: integer
+                  version:
+                    type: string
+                  widgets_count:
+                    type: integer
+                  workers:
+                    type: array
+                    items: {}
