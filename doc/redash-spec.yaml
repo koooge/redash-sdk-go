@@ -1,3 +1,4 @@
+
 openapi: 3.0.2
 info:
   title: redash
@@ -7,7 +8,7 @@ paths:
     get:
       responses:
         200:
-          description: ping
+          description: OK
           content:
             text/html:
               schema:
@@ -17,7 +18,7 @@ paths:
     get:
       responses:
         200:
-          description: status
+          description: OK
           content:
             application/json:
               schema:
@@ -72,3 +73,67 @@ paths:
                   workers:
                     type: array
                     items: {}
+  /api/users:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  auth_type:
+                    type: string
+                  is_disabled:
+                    type: boolean
+                  updated_at:
+                    type: string
+                  profile_image_url:
+                    type: string
+                    format: uri
+                  is_invitation_pending:
+                    type: boolean
+                  groups:
+                    type: array
+                    items:
+                      type: integer
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                  disabled_at:
+                    type: string
+                    nullable: true
+                  invite_link:
+                    type: string
+                    format: uri
+                  active_at:
+                    type: string
+                    nullable: true
+                  email:
+                    type: string
+                    format: email
+        400:
+          description: Bad Request
+          content:
+            applicatin/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
