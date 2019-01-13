@@ -129,7 +129,15 @@ paths:
                     type: string
                   id:
                     type: integer
-
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/users:
     get:
       parameters:
