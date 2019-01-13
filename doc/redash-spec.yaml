@@ -73,6 +73,32 @@ paths:
                     type: array
                     items: {}
   /api/datasources:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    pause_reason:
+                      type: string
+                      nullable: true
+                    syntex:
+                      type: string
+                    paused:
+                      type: integer
+                    view_only:
+                      type: boolean
+                    type:
+                      type: string
+                    id:
+                      type: integer
     post:
       requestBody:
         required: true
