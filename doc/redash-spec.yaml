@@ -72,6 +72,64 @@ paths:
                   workers:
                     type: array
                     items: {}
+  /api/datasources:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                options:
+                  type: object
+                  properties:
+                    dbname:
+                      type: string
+                name:
+                  type: string
+                type:
+                  type: string
+              required:
+                - options
+                - name
+                - email
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scheduled_queue_name:
+                    type: string
+                  name:
+                    type: string
+                  pause_reason:
+                    type: string
+                    nullable: true
+                  queue_name:
+                    type: string
+                  syntax:
+                    type: string
+                  paused:
+                    type: integer
+                  options:
+                    type: object
+                    properties:
+                      dbname:
+                        type: string
+                  groups:
+                    type: object
+                    properties:
+                      2:
+                        type: boolean
+                  type:
+                    type: string
+                  id:
+                    type: integer
+
   /api/users:
     get:
       parameters:
