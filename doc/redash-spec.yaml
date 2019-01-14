@@ -164,6 +164,71 @@ paths:
                 properties:
                   message:
                     type: string
+  /api/query_results:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                query_id:
+                  type: number
+                max_age:
+                  type: number
+                data_source_id:
+                  type: number
+                parameters:
+                  type: object
+                  properties:
+                    param:
+                      type: integer
+              required:
+                - query
+                - data_source_id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job:
+                    type: object
+                    properties:
+                      status:
+                        type: integer
+                      error:
+                        type: string
+                      id:
+                        type: string
+                      query_result_id:
+                        type: integer
+                        nullable: true
+                      updated_at:
+                        type: integer
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
   /api/users:
     get:
       parameters:
