@@ -183,9 +183,7 @@ paths:
                   type: number
                 parameters:
                   type: object
-                  properties:
-                    param:
-                      type: integer
+                  additionalProperties: true
               required:
                 - query
                 - data_source_id
