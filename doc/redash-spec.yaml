@@ -72,7 +72,7 @@ paths:
                   workers:
                     type: array
                     items: {}
-  /api/datasources:
+  /api/data_sources:
     get:
       responses:
         200:
