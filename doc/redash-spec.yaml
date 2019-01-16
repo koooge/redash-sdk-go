@@ -375,3 +375,47 @@ paths:
                 properties:
                   message:
                     type: string
+  /api/visualizations:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query_id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+                options:
+                  type: object
+                  additionalProperties: true
+                type:
+                  type: string
+
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    nullable: true
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  id:
+                    type: integer
+                  type:
+                    type: string
+                  options:
+                    type: object
+                    additionalProperties: true
+                  name:
+                    type: string
