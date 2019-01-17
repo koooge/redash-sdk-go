@@ -73,6 +73,114 @@ paths:
                     type: array
                     items: {}
   /api/dashbaords:
+    get:
+      parameters:
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: order
+          schema:
+            type: string
+        - in: query
+          name: q
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        is_archiverd:
+                          type: boolean
+                        updated_at:
+                          type: string
+                          format: date-time
+                        is_favorite:
+                          type: boolean
+                        user:
+                          type: object
+                          properties:
+                            auth_type:  
+                              type: string
+                            is_disabled:
+                              type: boolean
+                            updated_at:
+                              type: string
+                              format: date-time
+                            profile_image_url:
+                              type: string
+                              format: uri
+                            is_invitation_pending:
+                              type: boolean
+                            groups:
+                              type: array
+                              items:
+                                type: integer
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            disabled_at:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            is_email_verified:
+                              type: boolean
+                            active_at:
+                              type: string
+                              format: date-time
+                            email:
+                              type: string
+                              format: email
+                        layout:
+                          type: array
+                          items: {}
+                        is_draft:
+                          type: boolean
+                        id:
+                          type: integer
+                        user_id:
+                          type: integer
+                        name:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        slug:
+                          type: string
+                        version:  
+                          type: integer
+                        widgets:  
+                          nullable: true
+                        dashboard_filters_enabled:
+                          type: boolean
     post:
       requestBody:
         required: true
