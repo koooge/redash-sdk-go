@@ -165,6 +165,137 @@ paths:
                   message:
                     type: string
   /api/queries:
+    get:
+      parameters:
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: order
+          schema:
+            type: string
+        - in: query
+          name: q
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  page:
+                    type: integer
+                  page_size:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user:
+                          type: object
+                          properties:
+                            auth_type:
+                              type: string
+                            is_disabled:
+                              type: boolean
+                            updated_at:
+                              type: string
+                              format: date-time
+                            profile_image_url:
+                              type: string
+                              format: uri
+                            is_invitation_pending:
+                              type: boolean
+                            groups:
+                              type: array
+                              items:
+                                type: integer
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            disabled_at:
+                              type: string
+                              format: date-time
+                              nullable: true
+                            is_email_verified:
+                              type: boolean
+                            active_at:
+                              type: string
+                              format: date-time
+                            email:
+                              type: string
+                              format: email
+                        created_at:
+                          type: string
+                          format: date-time
+                        runtime:
+                          nullable: true
+                        latest_query_data_id:
+                          type: integer
+                          nullable: true
+                        is_favorite:
+                          type: boolean
+                        schedule:
+                          nullable: true
+                        description:
+                          type: string
+                          nullable: true
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        retrieved_at:
+                          nullable: true
+                        updated_at:
+                          type: string
+                          format: date-time
+                        options:
+                          type: object
+                          additionalProperties: true
+                        version:
+                          type: number
+                        last_modified_by_id:
+                          type: integer
+                        query_hash:
+                          type: string
+                        is_archived:
+                          type: boolean
+                        query:
+                          type: string
+                        api_key:
+                          type: string
+                        is_draft:
+                          type: boolean
+                        id:
+                          type: integer
+                        data_source_id:
+                          type: integer
+                        name:
+                          type: string
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
     post:
       requestBody:
         required: true
