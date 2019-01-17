@@ -164,6 +164,31 @@ paths:
                 properties:
                   message:
                     type: string
+  /api/groups:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    created_at:
+                      type: string
+                      format: date-time
+                    permissions:
+                      type: array
+                      items:
+                        type: string
+                    type:
+                      type: string
+                    id:
+                      type: integer
+                    name:
+                      type: string
   /api/queries:
     get:
       parameters:
@@ -676,7 +701,6 @@ paths:
                   additionalProperties: true
                 type:
                   type: string
-
       responses:
         200:
           description: OK
