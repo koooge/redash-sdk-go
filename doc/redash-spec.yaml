@@ -164,6 +164,156 @@ paths:
                 properties:
                   message:
                     type: string
+  /api/queries:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data_source_id:
+                  type: number
+                query:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+                schedule:
+                  type: string
+                options:
+                  type: object
+                  additionalProperties: true
+              required:
+                - data_source_id
+                - query
+                - name
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      auth_type:
+                        type: string
+                      is_disabled:
+                        type: boolean
+                      updated_at:
+                        type: string
+                        format: date-time
+                      profile_image_url:
+                        type: string
+                        format: uri
+                      is_invitation_pending:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      disabled_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_email_verified:
+                        type: boolean
+                      active_at:
+                        type: string
+                        format: date-time
+                      email:
+                        type: string
+                        format: email
+                  created_at:
+                    type: string
+                    format: date-time
+                  latest_query_data_id:
+                    type: number
+                    nullable: true
+                  schedule:
+                    type: string
+                    nullable: true
+                  description:
+                    type: string
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  updated_at:
+                    type: string
+                    format: date-time
+                  last_modified_by:
+                    type: object
+                    properties:
+                      auth_type:
+                        type: string
+                      is_disabled:
+                        type: boolean
+                      updated_at:
+                        type: string
+                        format: date-time
+                      profile_image_url:
+                        type: string
+                        format: uri
+                      is_invitation_pending:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      disabled_at:
+                        type: string
+                        format: date-time
+                      is_email_verified:
+                        type: boolean
+                      active_at:
+                        type: string
+                        format: date-time
+                      email:
+                        type: string
+                        format: email
+                  options:
+                    type: object
+                    additionalProperties: true
+                  version:
+                    type: integer
+                  is_favorite:
+                    type: boolean
+                  query_hash:
+                    type: string
+                  is_archived:
+                    type: boolean
+                  query:
+                    type: string
+                  api_key:
+                    type: string
+                  is_draft:
+                    type: boolean
+                  id:
+                    type: integer
+                  data_source_id:
+                    type: integer
+                  name:
+                    type: string
   /api/query_results:
     post:
       requestBody:
