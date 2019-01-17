@@ -724,3 +724,36 @@ paths:
                     additionalProperties: true
                   name:
                     type: string
+  /api/widgets:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id:
+                  type: integer
+                visualizationid:
+                  type: integer
+                options:
+                  type: object
+                  additionalProperties: true
+                text:
+                  type: string
+                width:
+                  type: number
+              required:
+                - dasboard_id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  widget:
+                    type: object
+                    additionalProperties: true
