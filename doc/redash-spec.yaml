@@ -958,6 +958,25 @@ paths:
                     type: object
                     additionalProperties: true
   /api/destinations:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    icon:
+                      type: string
+                    type:
+                      type: string
+                    id:
+                      type: integer
+                    name:
+                      type: string
     post:
       requestBody:
         required: true
