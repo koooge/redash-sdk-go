@@ -957,3 +957,60 @@ paths:
                   widget:
                     type: object
                     additionalProperties: true
+  /api/destinations:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                options:
+                  type: object
+                  additionalProperties: true
+                name:
+                  type: string
+                type:
+                  type: string
+              required:
+                - options
+                - name
+                - type
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  options:
+                    type: object
+                    additionalProperties: true
+                  icon:
+                    type: string
+                  type:
+                    type: string
+                  id:
+                    type: integer
+                  name:
+                    type: string
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
