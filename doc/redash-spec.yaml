@@ -1642,7 +1642,6 @@ paths:
                   type: boolean
                 auth_google_apps_domains:
                   type: string
-              additinalPropetries: true
       responses:
         200:
           description: OK
