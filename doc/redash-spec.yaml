@@ -1576,3 +1576,69 @@ paths:
                 properties:
                   message:
                     type: string
+  /api/settings/organization:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                auth_password_login_enabled:
+                  type: boolean
+                auth_google_apps_domains:
+                  type: string
+              additinalPropetries: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    type: object
+                    properties:
+                      date_format:
+                        type: string
+                      auth_jwt_auth_public_certs_url:
+                        type: string
+                      auth_jwt_auth_issuer:
+                        type: string
+                      auth_jwt_login_enabled:
+                        type: boolean
+                      auth_saml_nameid_format:
+                        type: string
+                      auth_jwt_auth_algorithms:
+                        type: array
+                        items: {}
+                      auth_google_apps_domains:
+                        type: array
+                        items: {}
+                      auth_jwt_auth_cookie_name:
+                        type: string
+                      auth_jwt_auth_audience:
+                        type: string
+                      auth_jwt_auth_header_name:
+                        type: string
+                      feature_show_permissions_control:
+                        type: boolean
+                      auth_saml_entity_id:
+                        type: string
+                      auth_passowrd_login_enabled:
+                        type: boolean
+                      auth_saml_metadata_url:
+                        type: string
+                      auth_saml_enabled:
+                        type: boolean
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
