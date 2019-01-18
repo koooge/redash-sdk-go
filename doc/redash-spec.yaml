@@ -1426,6 +1426,69 @@ paths:
                   message:
                     type: string
   /api/query_snippets:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+                    snippet:
+                      type: string
+                    trigger:
+                      type: string
+                    user:
+                      type: object
+                      properties:
+                        auth_type:
+                          type: string
+                        is_disabled:
+                          type: boolean
+                        updated_at:
+                          type: string
+                          format: date-time
+                        profile_image_url:
+                          type: string
+                          format: uri
+                        is_invitation_pending:
+                          type: boolean
+                        groups:
+                          type: array
+                          items:
+                            type: integer
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        disabled_at:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        is_email_verified:
+                          type: boolean
+                        active_at:
+                          type: string
+                          format: date-time
+                        email:
+                          type: string
+                          format: email
+                    id:
+                      type: integer
     post:
       requestBody:
         required: true
