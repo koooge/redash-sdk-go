@@ -73,6 +73,186 @@ paths:
                     type: array
                     items: {}
   /api/alerts:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    user:
+                      type: object
+                      properties:
+                        auth_type:
+                          type: string
+                        is_disabled:
+                          type: boolean
+                        updated_at:
+                          type: string
+                          format: date-time
+                        profile_image_url:
+                          type: string
+                        is_inviration_pending:
+                          type: boolean
+                        groups:
+                          type: array
+                          items:
+                            type: integer
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        disabled_at:
+                          type: string
+                          format: date-time
+                        is_email_verified:
+                          type: boolean
+                        active_at:
+                          type: string
+                          format: date-time
+                        email:
+                          type: string
+                          format: email
+                    state:
+                      type: string
+                    name:
+                      type: string
+                    rearm:
+                      type: integer
+                    updated_at:
+                      type: string
+                      format: date-time
+                    query:
+                      type: object
+                      properties:
+                        user:
+                          type: object
+                          properties:
+                            auth_type:
+                              type: string
+                            is_disabled:
+                              type: boolean
+                            updated_at:
+                              type: string
+                              format: date-time
+                            profile_image_url:
+                              type: string
+                            is_inviration_pending:
+                              type: boolean
+                            groups:
+                              type: array
+                              items:
+                                type: integer
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            disabled_at:
+                              type: string
+                              format: date-time
+                            is_email_verified:
+                              type: boolean
+                            active_at:
+                              type: string
+                              format: date-time
+                            email:
+                              type: string
+                              format: email
+                        created_at:
+                          type: string
+                          format: date-time
+                        latest_query_data_id:
+                          type: integer
+                        schedule:
+                          nullable: true
+                        description:
+                          type: string
+                          nullable: true
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        updated_at:
+                          type: string
+                          format: date-time
+                        last_modified_by:
+                          type: object
+                          properties:
+                            auth_type:
+                              type: string
+                            is_disabled:
+                              type: boolean
+                            updated_at:
+                              type: string
+                              format: date-time
+                            profile_image_url:
+                              type: string
+                            is_inviration_pending:
+                              type: boolean
+                            groups:
+                              type: array
+                              items:
+                                type: integer
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                            created_at:
+                              type: string
+                              format: date-time
+                            disabled_at:
+                              type: string
+                              format: date-time
+                            is_email_verified:
+                              type: boolean
+                            active_at:
+                              type: string
+                              format: date-time
+                            email:
+                              type: string
+                        options:
+                          type: object
+                          additionalProperties: true
+                        version:
+                          type: integer
+                        query_hash:
+                          type: string
+                        is_archiverd:
+                          type: boolean
+                        query:
+                          type: string
+                        api_key:
+                          type: string
+                        is_draft:
+                          type: boolean
+                        id:
+                          type: integer
+                        data_source_id:
+                          type: integer
+                        name:
+                          type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    last_triggered_at:
+                      type: string
+                      format: date-time
+                      nullable: true
+                    id:
+                      type: integer
+                    options:
+                      type: object
+                      additionalProperties: true
     post:
       requestBody:
         required: true
@@ -104,7 +284,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
+                  user: 
                     type: object
                     properties:
                       auth_type:
