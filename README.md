@@ -12,7 +12,7 @@ Redash client in go. Many APIs are still WIP.
 - go1.11+
 
 ## Usage
-```
+```go
 package main
 
 import (
