@@ -85,41 +85,7 @@ paths:
                   type: object
                   properties:
                     user:
-                      type: object
-                      properties:
-                        auth_type:
-                          type: string
-                        is_disabled:
-                          type: boolean
-                        updated_at:
-                          type: string
-                          format: date-time
-                        profile_image_url:
-                          type: string
-                        is_inviration_pending:
-                          type: boolean
-                        groups:
-                          type: array
-                          items:
-                            type: integer
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        created_at:
-                          type: string
-                          format: date-time
-                        disabled_at:
-                          type: string
-                          format: date-time
-                        is_email_verified:
-                          type: boolean
-                        active_at:
-                          type: string
-                          format: date-time
-                        email:
-                          type: string
-                          format: email
+                      $ref: '#/components/schemas/User'
                     state:
                       type: string
                     name:
@@ -133,41 +99,7 @@ paths:
                       type: object
                       properties:
                         user:
-                          type: object
-                          properties:
-                            auth_type:
-                              type: string
-                            is_disabled:
-                              type: boolean
-                            updated_at:
-                              type: string
-                              format: date-time
-                            profile_image_url:
-                              type: string
-                            is_inviration_pending:
-                              type: boolean
-                            groups:
-                              type: array
-                              items:
-                                type: integer
-                            id:
-                              type: integer
-                            name:
-                              type: string
-                            created_at:
-                              type: string
-                              format: date-time
-                            disabled_at:
-                              type: string
-                              format: date-time
-                            is_email_verified:
-                              type: boolean
-                            active_at:
-                              type: string
-                              format: date-time
-                            email:
-                              type: string
-                              format: email
+                          $ref: '#/components/schemas/User'
                         created_at:
                           type: string
                           format: date-time
@@ -284,42 +216,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  user: 
-                    type: object
-                    properties:
-                      auth_type:
-                        type: string
-                      is_disabled:
-                        type: boolean
-                      updated_at:
-                        type: string
-                        format: date-time
-                      profile_image_url:
-                        type: string
-                      is_inviration_pending:
-                        type: boolean
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      disabled_at:
-                        type: string
-                        format: date-time
-                      is_email_verified:
-                        type: boolean
-                      active_at:
-                        type: string
-                        format: date-time
-                      email:
-                        type: string
-                        format: email
+                  user:
+                    $ref: '#/components/schemas/User'
                   state:
                     type: string
                   name:
@@ -333,41 +231,7 @@ paths:
                     type: object
                     properties:
                       user:
-                        type: object
-                        properties:
-                          auth_type:
-                            type: string
-                          is_disabled:
-                            type: boolean
-                          updated_at:
-                            type: string
-                            format: date-time
-                          profile_image_url:
-                            type: string
-                          is_inviration_pending:
-                            type: boolean
-                          groups:
-                            type: array
-                            items:
-                              type: integer
-                          id:
-                            type: integer
-                          name:
-                            type: string
-                          created_at:
-                            type: string
-                            format: date-time
-                          disabled_at:
-                            type: string
-                            format: date-time
-                          is_email_verified:
-                            type: boolean
-                          active_at:
-                            type: string
-                            format: date-time
-                          email:
-                            type: string
-                            format: email
+                        $ref: '#/components/schemas/User'
                       created_at:
                         type: string
                         format: date-time
@@ -514,43 +378,7 @@ paths:
                         is_favorite:
                           type: boolean
                         user:
-                          type: object
-                          properties:
-                            auth_type:  
-                              type: string
-                            is_disabled:
-                              type: boolean
-                            updated_at:
-                              type: string
-                              format: date-time
-                            profile_image_url:
-                              type: string
-                              format: uri
-                            is_invitation_pending:
-                              type: boolean
-                            groups:
-                              type: array
-                              items:
-                                type: integer
-                            id:
-                              type: integer
-                            name:
-                              type: string
-                            created_at:
-                              type: string
-                              format: date-time
-                            disabled_at:
-                              type: string
-                              format: date-time
-                              nullable: true
-                            is_email_verified:
-                              type: boolean
-                            active_at:
-                              type: string
-                              format: date-time
-                            email:
-                              type: string
-                              format: email
+                          $ref: '#/components/schemas/User'
                         layout:
                           type: array
                           items: {}
@@ -567,9 +395,9 @@ paths:
                           format: date-time
                         slug:
                           type: string
-                        version:  
+                        version:
                           type: integer
-                        widgets:  
+                        widgets:
                           nullable: true
                         dashboard_filters_enabled:
                           type: boolean
@@ -605,43 +433,7 @@ paths:
                   is_favorite:
                     type: boolean
                   user:
-                    type: object
-                    properties:
-                      auth_type:
-                        type: string
-                      is_disabled:
-                        type: boolean
-                      updated_at:
-                        type: string
-                        format: date-time
-                      profile_image_url:
-                        type: string
-                        format: uri
-                      is_invitation_pending:
-                        type: boolean
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      disabled_at:
-                        type: string
-                        format: date-time
-                        nullable: true
-                      is_email_verified:
-                        type: boolean
-                      active_at:
-                        type: string
-                        format: date-time
-                      email:
-                        type: string
-                        format: email
+                    $ref: '#/components/schemas/User'
                   layout:
                     type: array
                     items: {}
@@ -820,43 +612,7 @@ paths:
                       type: object
                       properties:
                         user:
-                          type: object
-                          properties:
-                            auth_type:
-                              type: string
-                            is_disabled:
-                              type: boolean
-                            updated_at:
-                              type: string
-                              format: date-time
-                            profile_image_url:
-                              type: string
-                              format: uri
-                            is_invitation_pending:
-                              type: boolean
-                            groups:
-                              type: array
-                              items:
-                                type: integer
-                            id:
-                              type: integer
-                            name:
-                              type: string
-                            created_at:
-                              type: string
-                              format: date-time
-                            disabled_at:
-                              type: string
-                              format: date-time
-                              nullable: true
-                            is_email_verified:
-                              type: boolean
-                            active_at:
-                              type: string
-                              format: date-time
-                            email:
-                              type: string
-                              format: email
+                          $ref: '#/components/schemas/User'
                         created_at:
                           type: string
                           format: date-time
@@ -947,43 +703,7 @@ paths:
                 type: object
                 properties:
                   user:
-                    type: object
-                    properties:
-                      auth_type:
-                        type: string
-                      is_disabled:
-                        type: boolean
-                      updated_at:
-                        type: string
-                        format: date-time
-                      profile_image_url:
-                        type: string
-                        format: uri
-                      is_invitation_pending:
-                        type: boolean
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      disabled_at:
-                        type: string
-                        format: date-time
-                        nullable: true
-                      is_email_verified:
-                        type: boolean
-                      active_at:
-                        type: string
-                        format: date-time
-                      email:
-                        type: string
-                        format: email
+                    $ref: '#/components/schemas/User'
                   created_at:
                     type: string
                     format: date-time
@@ -1450,43 +1170,7 @@ paths:
                     trigger:
                       type: string
                     user:
-                      type: object
-                      properties:
-                        auth_type:
-                          type: string
-                        is_disabled:
-                          type: boolean
-                        updated_at:
-                          type: string
-                          format: date-time
-                        profile_image_url:
-                          type: string
-                          format: uri
-                        is_invitation_pending:
-                          type: boolean
-                        groups:
-                          type: array
-                          items:
-                            type: integer
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        created_at:
-                          type: string
-                          format: date-time
-                        disabled_at:
-                          type: string
-                          format: date-time
-                          nullable: true
-                        is_email_verified:
-                          type: boolean
-                        active_at:
-                          type: string
-                          format: date-time
-                        email:
-                          type: string
-                          format: email
+                      $ref: '#/components/schemas/User'
                     id:
                       type: integer
     post:
@@ -1528,43 +1212,7 @@ paths:
                   trigger:
                     type: string
                   user:
-                    type: object
-                    properties:
-                      auth_type:
-                        type: string
-                      is_disabled:
-                        type: boolean
-                      updated_at:
-                        type: string
-                        format: date-time
-                      profile_image_url:
-                        type: string
-                        format: uri
-                      is_invitation_pending:
-                        type: boolean
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      disabled_at:
-                        type: string
-                        format: date-time
-                        nullable: true
-                      is_email_verified:
-                        type: boolean
-                      active_at:
-                        type: string
-                        format: date-time
-                      email:
-                        type: string
-                        format: email
+                    $ref: '#/components/schemas/User'
                   id:
                     type: integer
         400:
@@ -1694,3 +1342,43 @@ paths:
                 properties:
                   message:
                     type: string
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        auth_type:
+          type: string
+        is_disabled:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+        profile_image_url:
+          type: string
+          format: uri
+        is_invitation_pending:
+          type: boolean
+        groups:
+          type: array
+          items:
+            type: integer
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        disabled_at:
+          type: string
+          format: date-time
+          nullable: true
+        is_email_verified:
+          type: boolean
+        active_at:
+          type: string
+          format: date-time
+        email:
+          type: string
+          format: email
