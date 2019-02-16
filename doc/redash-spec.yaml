@@ -185,6 +185,8 @@ paths:
                     options:
                       type: object
                       additionalProperties: true
+      tags:
+        - Alert
     post:
       requestBody:
         required: true
@@ -328,6 +330,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - Alert
   /api/dashbaords:
     get:
       parameters:
@@ -401,6 +405,8 @@ paths:
                           nullable: true
                         dashboard_filters_enabled:
                           type: boolean
+      tags:
+        - Dashboard
     post:
       requestBody:
         required: true
@@ -456,6 +462,8 @@ paths:
                     nullable: true
                   dashboard_filters_enabled:
                     type: boolean
+      tags:
+        - Dashboard
   /api/data_sources:
     get:
       responses:
@@ -483,6 +491,8 @@ paths:
                       type: string
                     id:
                       type: integer
+      tags:
+        - DataSource
     post:
       requestBody:
         required: true
@@ -548,6 +558,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - DataSource
   /api/groups:
     get:
       responses:
@@ -573,6 +585,8 @@ paths:
                       type: integer
                     name:
                       type: string
+      tags:
+        - Group
   /api/queries:
     get:
       parameters:
@@ -669,6 +683,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - Query
     post:
       requestBody:
         required: true
@@ -782,6 +798,8 @@ paths:
                     type: integer
                   name:
                     type: string
+      tags:
+        - Query
   /api/query_results:
     post:
       requestBody:
@@ -845,6 +863,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - QueryResult
   /api/users:
     get:
       parameters:
@@ -923,6 +943,8 @@ paths:
                         email:
                           type: string
                           format: email
+      tags:
+        - User
     post:
       requestBody:
         required: true
@@ -993,6 +1015,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - User
   /api/visualizations:
     post:
       requestBody:
@@ -1036,6 +1060,8 @@ paths:
                     additionalProperties: true
                   name:
                     type: string
+      tags:
+        - Visualization
   /api/widgets:
     post:
       requestBody:
@@ -1069,6 +1095,8 @@ paths:
                   widget:
                     type: object
                     additionalProperties: true
+      tags:
+        - Widget
   /api/destinations:
     get:
       responses:
@@ -1089,6 +1117,8 @@ paths:
                       type: integer
                     name:
                       type: string
+      tags:
+        - Destination
     post:
       requestBody:
         required: true
@@ -1145,6 +1175,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - Destination
   /api/query_snippets:
     get:
       responses:
@@ -1173,6 +1205,8 @@ paths:
                       $ref: '#/components/schemas/User'
                     id:
                       type: integer
+      tags:
+        - QuerySnippet
     post:
       requestBody:
         required: true
@@ -1224,6 +1258,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - QuerySnippet
   /api/settings/organization:
     get:
       responses:
@@ -1278,6 +1314,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - Setting
     post:
       requestBody:
         required: true
@@ -1342,6 +1380,8 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - Setting
 components:
   schemas:
     User:
