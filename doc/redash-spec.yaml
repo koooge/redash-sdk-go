@@ -560,6 +560,26 @@ paths:
                     type: string
       tags:
         - DataSource
+  /api/data_sources/types:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    configuration_schema:
+                      $ref: '#/components/schemas/ConfigurationSchema'
+                    type:
+                      type: string
+                    name:
+                      type: string
+      tags:
+        - DataSource
   /api/groups:
     get:
       responses:
@@ -1382,8 +1402,52 @@ paths:
                     type: string
       tags:
         - Setting
+
 components:
   schemas:
+    ConfigurationSchema:
+      type: object
+      properties:
+        required:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+        properties:
+          type: object
+          properties:
+            db:
+              type: object
+              properties:
+                type:
+                  type: string
+                title:
+                  type: string
+            apikey:
+              type: object
+              properties:
+                type:
+                  type: string
+            endpoint:
+              type: object
+              properties:
+                type:
+                  type: string
+            type:
+              type: object
+              properties:
+                type:
+                  type: string
+            get_schema:
+              type: object
+              properties:
+                default:
+                  type: boolean
+                type:
+                  type: string
+                title:
+                  type: string
     User:
       type: object
       properties:
