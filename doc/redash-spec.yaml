@@ -580,6 +580,28 @@ paths:
                       type: string
       tags:
         - DataSource
+  '/api/data_srouces/{data_source_id}/schema':
+    get:
+      parameters:
+        - in: path
+          name: data_source_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Schema'
+      tags:
+        - DataSource
   /api/groups:
     get:
       responses:
@@ -1448,6 +1470,15 @@ components:
                   type: string
                 title:
                   type: string
+    Schema:
+      type: object
+      properties:
+        name:
+          type: string
+        columns:
+          type: array
+          items:
+            type: string
     User:
       type: object
       properties:
