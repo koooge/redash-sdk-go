@@ -19,4 +19,4 @@ doc: doc-deps
 	rm -rf doc && mkdir doc
 	godocdown redash > doc/redash.md
 
-.PHONY: get lint test doc-deps doc
+.PHONY: get lint test coverage doc-deps doc
