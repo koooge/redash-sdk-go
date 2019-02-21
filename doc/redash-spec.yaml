@@ -560,6 +560,23 @@ paths:
                     type: string
       tags:
         - DataSource
+  /api/data_sources/{data_source_id}:
+    get:
+      parameters:
+        - in: path
+          name: data_source_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSource'
+      tags:
+        - DataSource
   /api/data_sources/types:
     get:
       responses:
@@ -580,7 +597,7 @@ paths:
                       type: string
       tags:
         - DataSource
-  '/api/data_srouces/{data_source_id}/schema':
+  /api/data_sources/{data_source_id}/schema:
     get:
       parameters:
         - in: path
@@ -1470,6 +1487,34 @@ components:
                   type: string
                 title:
                   type: string
+    DataSource:
+      type: object
+      properties:
+        scheduled_queue_name:
+          type: string
+        name:
+          type: string
+        pause_reason:
+          nullable: true
+        queue_name:
+          type: string
+        syntax:
+          type: string
+        paused:
+          type: integer
+        options:
+          type: object
+          properties:
+            url:
+              type: string
+        groups:
+          type: object
+          additionalProperties:
+            type: boolean
+        type:
+          type: string
+        id:
+          type: integer
     Schema:
       type: object
       properties:
