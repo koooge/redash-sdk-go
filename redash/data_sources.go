@@ -190,26 +190,26 @@ func (c *Client) DeleteDataSource(input *DeleteDataSourceInput) *DeleteDataSourc
 }
 
 // GET /api/data_sources/{data_source_id}/schema
-type GetDataSourcesSchemaInput struct {
+type GetDataSourceSchemaInput struct {
 	DataSourceId int
 }
 
-type GetDataSourcesSchemaOutput struct {
+type GetDataSourceSchemaOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDataSourcesSchema(input *GetDataSourcesSchemaInput) *GetDataSourcesSchemaOutput {
+func (c *Client) GetDataSourceSchema(input *GetDataSourceSchemaInput) *GetDataSourceSchemaOutput {
 	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/schema"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetDataSourcesSchemaOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDataSourceSchemaOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDataSourcesSchemaOutput{
+	return &GetDataSourceSchemaOutput{
 		StatusCode: resp.StatusCode,
 		Body:       string(b),
 	}

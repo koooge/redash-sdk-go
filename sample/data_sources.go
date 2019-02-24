@@ -58,11 +58,11 @@ func main() {
 	fmt.Println(output5.StatusCode)
 	fmt.Println(output5.Body)
 
-	fmt.Println("---GetDataSourcesSchema()---")
-	input7 := &redash.GetDataSourcesSchemaInput{
+	fmt.Println("---GetDataSourceSchema()---")
+	input7 := &redash.GetDataSourceSchemaInput{
 		DataSourceId: dataSourceId,
 	}
-	output7 := client.GetDataSourcesSchema(input7)
+	output7 := client.GetDataSourceSchema(input7)
 	fmt.Println(output7.StatusCode)
 	fmt.Println(output7.Body)
 

@@ -22,7 +22,7 @@ type IClient interface {
 	GetDataSource(*GetDataSourceInput) *GetDataSourceOutput
 	UpdateDataSource(*UpdateDataSourceInput) *UpdateDataSourceOutput
 	DeleteDataSource(*DeleteDataSourceInput) *DeleteDataSourceOutput
-	GetDataSourcesSchema(*GetDataSourcesSchemaInput) *GetDataSourcesSchemaOutput
+	GetDataSourceSchema(*GetDataSourceSchemaInput) *GetDataSourceSchemaOutput
 	PauseDataSource(*PauseDataSourceInput) *PauseDataSourceOutput
 	UnpauseDataSource(*UnpauseDataSourceInput) *UnpauseDataSourceOutput
 	TestDataSource(*TestDataSourceInput) *TestDataSourceOutput

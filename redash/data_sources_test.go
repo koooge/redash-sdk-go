@@ -188,12 +188,12 @@ func TestDeleteDataSource(t *testing.T) {
 	}
 }
 
-func TestGetDataSourcesSchema(t *testing.T) {
-	const getDataSourcesSchemaResBody = `{"something":"something"}`
+func TestGetDataSourceSchema(t *testing.T) {
+	const getDataSourceSchemaResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/1/schema" {
-			w.Write([]byte(getDataSourcesSchemaResBody))
+			w.Write([]byte(getDataSourceSchemaResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -203,15 +203,15 @@ func TestGetDataSourcesSchema(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
-		input  *GetDataSourcesSchemaInput
+		input  *GetDataSourceSchemaInput
 		status int
 		body   string
 	}{
-		{input: &GetDataSourcesSchemaInput{DataSourceId: 1}, status: 200, body: getDataSourcesSchemaResBody},
+		{input: &GetDataSourceSchemaInput{DataSourceId: 1}, status: 200, body: getDataSourceSchemaResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDataSourcesSchema(c.input)
+		result := testClient.GetDataSourceSchema(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}
