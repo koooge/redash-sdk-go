@@ -32,8 +32,8 @@ func (c *Client) put(path string, body string) (*http.Response, error) {
 	return c.request(http.MethodPut, path, body)
 }
 
-func (c *Client) delete(path string, body string) (*http.Response, error) {
-	return c.request(http.MethodDelete, path, body)
+func (c *Client) delete(path string) (*http.Response, error) {
+	return c.request(http.MethodDelete, path, "")
 }
 
 func (c *Client) request(httpMethod string, path string, body string) (*http.Response, error) {

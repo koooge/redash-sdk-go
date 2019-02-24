@@ -38,6 +38,36 @@ func TestListDataSources(t *testing.T) {
 	}
 }
 
+func TestCreateDataSource(t *testing.T) {
+	const createDataSourceResBody = `{"something":"something"}`
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/api/data_sources" {
+			fmt.Fprint(w, createDataSourceResBody)
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
+
+	testCases := []struct {
+		input  *CreateDataSourceInput
+		status int
+		body   string
+	}{
+		{input: &CreateDataSourceInput{Options: &CreateDataSourceInputOptions{Dbname: "something"}, Name: "bar", Type: "pg"}, status: 200, body: createDataSourceResBody},
+	}
+
+	for _, c := range testCases {
+		result := testClient.CreateDataSource(c.input)
+		if result.StatusCode != c.status || result.Body != c.body {
+			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
+		}
+	}
+}
+
 func TestGetDataSource(t *testing.T) {
 	const getDataSourceResBody = `{"something":"something"}`
 
@@ -62,6 +92,36 @@ func TestGetDataSource(t *testing.T) {
 
 	for _, c := range testCases {
 		result := testClient.GetDataSource(c.input)
+		if result.StatusCode != c.status || result.Body != c.body {
+			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
+		}
+	}
+}
+
+func TestDeleteDataSource(t *testing.T) {
+	const deleteDataSourceResBody = `{"something":"something"}`
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/api/data_sources/123" {
+			fmt.Fprint(w, deleteDataSourceResBody)
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
+
+	testCases := []struct {
+		input  *DeleteDataSourceInput
+		status int
+		body   string
+	}{
+		{input: &DeleteDataSourceInput{DataSourceId: 123}, status: 200, body: deleteDataSourceResBody},
+	}
+
+	for _, c := range testCases {
+		result := testClient.DeleteDataSource(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

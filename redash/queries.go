@@ -217,12 +217,7 @@ type DeleteQueryOutput struct {
 func (c *Client) DeleteQuery(input *DeleteQueryInput) *DeleteQueryOutput {
 	path := "/api/queries/" + strconv.Itoa(input.QueryId)
 
-	body, err := json.Marshal(input)
-	if err != nil {
-		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`}
-	}
-
-	resp, err := c.delete(path, string(body))
+	resp, err := c.delete(path)
 	if err != nil {
 		return &DeleteQueryOutput{Body: `{"error":"` + err.Error() + `"}`, StatusCode: resp.StatusCode}
 	}
