@@ -274,3 +274,27 @@ func (c *Client) UnpauseDataSource(input *UnpauseDataSourceInput) *UnpauseDataSo
 }
 
 // POST /api/data_sources/{data_source_id}/test
+type TestDataSourceInput struct {
+	DataSourceId int
+}
+
+type TestDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) TestDataSource(input *TestDataSourceInput) *TestDataSourceOutput {
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/test"
+
+	resp, err := c.post(path, "")
+	if err != nil {
+		return &TestDataSourceOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &TestDataSourceOutput{
+		StatusCode: resp.StatusCode,
+		Body:       string(b),
+	}
+}

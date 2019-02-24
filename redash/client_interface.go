@@ -17,8 +17,15 @@ type IClient interface {
 
 	// data_sources
 	ListDataSources(*ListDataSourcesInput) *ListDataSourcesOutput
+	CreateDataSource(*CreateDataSourceInput) *CreateDataSourceOutput
+	ListDataSourcesTypes(*ListDataSourcesTypesInput) *ListDataSourcesTypesOutput
 	GetDataSource(*GetDataSourceInput) *GetDataSourceOutput
+	UpdateDataSource(*UpdateDataSourceInput) *UpdateDataSourceOutput
+	DeleteDataSource(*DeleteDataSourceInput) *DeleteDataSourceOutput
 	GetDataSourcesSchema(*GetDataSourcesSchemaInput) *GetDataSourcesSchemaOutput
+	PauseDataSource(*PauseDataSourceInput) *PauseDataSourceOutput
+	UnpauseDataSource(*UnpauseDataSourceInput) *UnpauseDataSourceOutput
+	TestDataSource(*TestDataSourceInput) *TestDataSourceOutput
 
 	// destinations
 	ListDestinations(*ListDestinationsInput) *ListDestinationsOutput

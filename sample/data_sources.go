@@ -82,13 +82,13 @@ func main() {
 	fmt.Println(output9.StatusCode)
 	fmt.Println(output9.Body)
 
-	// fmt.Println("---UnpauseDataSource()---")
-	// input10 := &redash.TestDataSourceInput{
-	// 	DataSourceId: dataSourceId,
-	// }
-	// output10 := client.TestDataSource(input10)
-	// fmt.Println(output10.StatusCode)
-	// fmt.Println(output10.Body)
+	fmt.Println("---TestDataSource()---")
+	input10 := &redash.TestDataSourceInput{
+		DataSourceId: dataSourceId,
+	}
+	output10 := client.TestDataSource(input10)
+	fmt.Println(output10.StatusCode)
+	fmt.Println(output10.Body)
 
 	fmt.Println("---DeleteDataSource()---")
 	input6 := &redash.DeleteDataSourceInput{
