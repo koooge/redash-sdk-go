@@ -1,7 +1,6 @@
 package redash
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -12,7 +11,7 @@ func TestListDataSources(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources" {
-			fmt.Fprint(w, listDataSourcesResBody)
+			w.Write([]byte(listDataSourcesResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -43,7 +42,7 @@ func TestCreateDataSource(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost && r.URL.Path == "/api/data_sources" {
-			fmt.Fprint(w, createDataSourceResBody)
+			w.Write([]byte(createDataSourceResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -73,7 +72,7 @@ func TestListDataSourcesTypes(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/types" {
-			fmt.Fprint(w, listDataSourcesTypesResBody)
+			w.Write([]byte(listDataSourcesTypesResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -104,7 +103,7 @@ func TestGetDataSource(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/1" {
-			fmt.Fprint(w, getDataSourceResBody)
+			w.Write([]byte(getDataSourceResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -134,7 +133,7 @@ func TestUpdateDataSource(t *testing.T) {
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost && r.URL.Path == "/api/data_sources/123" {
-			fmt.Fprint(w, updateDataSourceResBody)
+			w.Write([]byte(updateDataSourceResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -189,12 +188,12 @@ func TestDeleteDataSource(t *testing.T) {
 	}
 }
 
-func TestGetDataSourceSchema(t *testing.T) {
-	const getDataSourceSchemaResBody = `{"something":"something"}`
+func TestGetDataSourcesSchema(t *testing.T) {
+	const getDataSourcesSchemaResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/1/schema" {
-			fmt.Fprint(w, getDataSourceSchemaResBody)
+			w.Write([]byte(getDataSourcesSchemaResBody))
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -204,15 +203,76 @@ func TestGetDataSourceSchema(t *testing.T) {
 	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
 
 	testCases := []struct {
-		input  *GetDataSourceSchemaInput
+		input  *GetDataSourcesSchemaInput
 		status int
 		body   string
 	}{
-		{input: &GetDataSourceSchemaInput{DataSourceId: 1}, status: 200, body: getDataSourceSchemaResBody},
+		{input: &GetDataSourcesSchemaInput{DataSourceId: 1}, status: 200, body: getDataSourcesSchemaResBody},
 	}
 
 	for _, c := range testCases {
-		result := testClient.GetDataSourceSchema(c.input)
+		result := testClient.GetDataSourcesSchema(c.input)
+		if result.StatusCode != c.status || result.Body != c.body {
+			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
+		}
+	}
+}
+
+func TestPauseDataSource(t *testing.T) {
+	const pauseDataSourceResBody = `{"something":"something"}`
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost && r.URL.Path == "/api/data_sources/123/pause" {
+			w.Write([]byte(pauseDataSourceResBody))
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
+
+	testCases := []struct {
+		input  *PauseDataSourceInput
+		status int
+		body   string
+	}{
+		{input: &PauseDataSourceInput{DataSourceId: 123}, status: 200, body: pauseDataSourceResBody},
+		{input: &PauseDataSourceInput{DataSourceId: 123, Reason: "something"}, status: 200, body: pauseDataSourceResBody},
+	}
+
+	for _, c := range testCases {
+		result := testClient.PauseDataSource(c.input)
+		if result.StatusCode != c.status || result.Body != c.body {
+			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
+		}
+	}
+}
+
+func TestUnpauseDataSource(t *testing.T) {
+	const unpauseDataSourceResBody = `{"something":"something"}`
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodDelete && r.URL.Path == "/api/data_sources/123/pause" {
+			w.Write([]byte(unpauseDataSourceResBody))
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
+
+	testCases := []struct {
+		input  *UnpauseDataSourceInput
+		status int
+		body   string
+	}{
+		{input: &UnpauseDataSourceInput{DataSourceId: 123}, status: 200, body: unpauseDataSourceResBody},
+	}
+
+	for _, c := range testCases {
+		result := testClient.UnpauseDataSource(c.input)
 		if result.StatusCode != c.status || result.Body != c.body {
 			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
 		}

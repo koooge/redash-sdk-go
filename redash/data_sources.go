@@ -190,33 +190,87 @@ func (c *Client) DeleteDataSource(input *DeleteDataSourceInput) *DeleteDataSourc
 }
 
 // GET /api/data_sources/{data_source_id}/schema
-type GetDataSourceSchemaInput struct {
+type GetDataSourcesSchemaInput struct {
 	DataSourceId int
 }
 
-type GetDataSourceSchemaOutput struct {
+type GetDataSourcesSchemaOutput struct {
 	Body       string
 	StatusCode int
 }
 
-func (c *Client) GetDataSourceSchema(input *GetDataSourceSchemaInput) *GetDataSourceSchemaOutput {
+func (c *Client) GetDataSourcesSchema(input *GetDataSourcesSchemaInput) *GetDataSourcesSchemaOutput {
 	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/schema"
 
 	resp, err := c.get(path)
 	if err != nil {
-		return &GetDataSourceSchemaOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+		return &GetDataSourcesSchemaOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
 	}
 	defer resp.Body.Close()
 
 	b, _ := ioutil.ReadAll(resp.Body)
-	return &GetDataSourceSchemaOutput{
+	return &GetDataSourcesSchemaOutput{
 		StatusCode: resp.StatusCode,
 		Body:       string(b),
 	}
 }
 
 // POST /api/data_sources/{data_source_id}/pause
+type PauseDataSourceInput struct {
+	DataSourceId int    `json:"-"`
+	Reason       string `json:"reason,omitempty"`
+}
+
+type PauseDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) PauseDataSource(input *PauseDataSourceInput) *PauseDataSourceOutput {
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/pause"
+
+	body, err := json.Marshal(input)
+	if err != nil {
+		return &PauseDataSourceOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+
+	resp, err := c.post(path, string(body))
+	if err != nil {
+		return &PauseDataSourceOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &PauseDataSourceOutput{
+		StatusCode: resp.StatusCode,
+		Body:       string(b),
+	}
+}
 
 // DELETE /api/data_sources/{data_source_id}/pause
+type UnpauseDataSourceInput struct {
+	DataSourceId int
+}
+
+type UnpauseDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) UnpauseDataSource(input *UnpauseDataSourceInput) *UnpauseDataSourceOutput {
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId) + "/pause"
+
+	resp, err := c.delete(path)
+	if err != nil {
+		return &UnpauseDataSourceOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &UnpauseDataSourceOutput{
+		StatusCode: resp.StatusCode,
+		Body:       string(b),
+	}
+}
 
 // POST /api/data_sources/{data_source_id}/test

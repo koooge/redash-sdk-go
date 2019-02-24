@@ -58,29 +58,29 @@ func main() {
 	fmt.Println(output5.StatusCode)
 	fmt.Println(output5.Body)
 
-	fmt.Println("---GetDataSourceSchema()---")
-	input7 := &redash.GetDataSourceSchemaInput{
+	fmt.Println("---GetDataSourcesSchema()---")
+	input7 := &redash.GetDataSourcesSchemaInput{
 		DataSourceId: dataSourceId,
 	}
-	output7 := client.GetDataSourceSchema(input7)
+	output7 := client.GetDataSourcesSchema(input7)
 	fmt.Println(output7.StatusCode)
 	fmt.Println(output7.Body)
 
-	// fmt.Println("---PauseDataSource()---")
-	// input8 := &redash.PauseDataSourceInput{
-	// 	DataSourceId: dataSourceId,
-	// }
-	// output8 := client.PauseDataSource(input8)
-	// fmt.Println(output8.StatusCode)
-	// fmt.Println(output8.Body)
+	fmt.Println("---PauseDataSource()---")
+	input8 := &redash.PauseDataSourceInput{
+		DataSourceId: dataSourceId,
+	}
+	output8 := client.PauseDataSource(input8)
+	fmt.Println(output8.StatusCode)
+	fmt.Println(output8.Body)
 
-	// fmt.Println("---UnpauseDataSource()---")
-	// input9 := &redash.UnpauseDataSourceInput{
-	// 	DataSourceId: dataSourceId,
-	// }
-	// output9 := client.UnpauseDataSource(input9)
-	// fmt.Println(output9.StatusCode)
-	// fmt.Println(output9.Body)
+	fmt.Println("---UnpauseDataSource()---")
+	input9 := &redash.UnpauseDataSourceInput{
+		DataSourceId: dataSourceId,
+	}
+	output9 := client.UnpauseDataSource(input9)
+	fmt.Println(output9.StatusCode)
+	fmt.Println(output9.Body)
 
 	// fmt.Println("---UnpauseDataSource()---")
 	// input10 := &redash.TestDataSourceInput{
