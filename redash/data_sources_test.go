@@ -11,7 +11,7 @@ func TestListDataSources(t *testing.T) {
 	const listDataSourcesResBody = `[{"something":"something"}]`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources" {
+		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources" {
 			fmt.Fprint(w, listDataSourcesResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
@@ -42,7 +42,7 @@ func TestCreateDataSource(t *testing.T) {
 	const createDataSourceResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources" {
+		if r.Method == http.MethodPost && r.URL.Path == "/api/data_sources" {
 			fmt.Fprint(w, createDataSourceResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
@@ -72,7 +72,7 @@ func TestListDataSourcesTypes(t *testing.T) {
 	const listDataSourcesTypesResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources/types" {
+		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/types" {
 			fmt.Fprint(w, listDataSourcesTypesResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
@@ -103,7 +103,7 @@ func TestGetDataSource(t *testing.T) {
 	const getDataSourceResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources/1" {
+		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/1" {
 			fmt.Fprint(w, getDataSourceResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
@@ -133,7 +133,7 @@ func TestDeleteDataSource(t *testing.T) {
 	const deleteDataSourceResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources/123" {
+		if r.Method == http.MethodDelete && r.URL.Path == "/api/data_sources/123" {
 			fmt.Fprint(w, deleteDataSourceResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
@@ -163,7 +163,7 @@ func TestGetDataSourceSchema(t *testing.T) {
 	const getDataSourceSchemaResBody = `{"something":"something"}`
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path == "/api/data_sources/1/schema" {
+		if r.Method == http.MethodGet && r.URL.Path == "/api/data_sources/1/schema" {
 			fmt.Fprint(w, getDataSourceSchemaResBody)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
