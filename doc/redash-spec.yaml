@@ -546,6 +546,26 @@ paths:
                     type: string
       tags:
         - DataSource
+  /api/data_sources/types:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    configuration_schema:
+                      $ref: '#/components/schemas/ConfigurationSchema'
+                    type:
+                      type: string
+                    name:
+                      type: string
+      tags:
+        - DataSource
   /api/data_sources/{data_source_id}:
     get:
       parameters:
@@ -595,26 +615,6 @@ paths:
       responses:
         204:
           description: No Content
-      tags:
-        - DataSource
-  /api/data_sources/types:
-    get:
-      responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    configuration_schema:
-                      $ref: '#/components/schemas/ConfigurationSchema'
-                    type:
-                      type: string
-                    name:
-                      type: string
       tags:
         - DataSource
   /api/data_sources/{data_source_id}/schema:
