@@ -45,18 +45,18 @@ func main() {
 	fmt.Println(output4.StatusCode)
 	fmt.Println(output4.Body)
 
-	// fmt.Println("---UpdateDataSource()---")
-	// input5 := &redash.UpdateDataSourceInput{
-	// 	DataSourceId: dataSourceId,
-	// 	&redash.UpdateDataSourceOptions{
-	// 		Dbname: "hogefuga",
-	// 	},
-	// 	Name: "UpdateDataSourceSample",
-	// 	Type: "pg",
-	// }
-	// output5 := client.UpdateDataSource(input5)
-	// fmt.Println(output5.StatusCode)
-	// fmt.Println(output5.Body)
+	fmt.Println("---UpdateDataSource()---")
+	input5 := &redash.UpdateDataSourceInput{
+		DataSourceId: dataSourceId,
+		Options: &redash.UpdateDataSourceInputOptions{
+			Dbname: "hogefuga",
+		},
+		Name: "UpdateDataSourceSample",
+		Type: "pg",
+	}
+	output5 := client.UpdateDataSource(input5)
+	fmt.Println(output5.StatusCode)
+	fmt.Println(output5.Body)
 
 	fmt.Println("---GetDataSourceSchema()---")
 	input7 := &redash.GetDataSourceSchemaInput{

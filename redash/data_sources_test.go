@@ -129,6 +129,36 @@ func TestGetDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateDataSource(t *testing.T) {
+	const updateDataSourceResBody = `{"something":"something"}`
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost && r.URL.Path == "/api/data_sources/123" {
+			fmt.Fprint(w, updateDataSourceResBody)
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	testClient := NewClient(&Config{EndpointUrl: ts.URL, ApiKey: "dummy"})
+
+	testCases := []struct {
+		input  *UpdateDataSourceInput
+		status int
+		body   string
+	}{
+		{input: &UpdateDataSourceInput{DataSourceId: 123, Options: &UpdateDataSourceInputOptions{Dbname: "something!"}, Name: "baz", Type: "pg"}, status: 200, body: updateDataSourceResBody},
+	}
+
+	for _, c := range testCases {
+		result := testClient.UpdateDataSource(c.input)
+		if result.StatusCode != c.status || result.Body != c.body {
+			t.Errorf("Unexpected response: status:%+v != %+v, body:%+v != %+v", result.StatusCode, c.status, result.Body, c.body)
+		}
+	}
+}
+
 func TestDeleteDataSource(t *testing.T) {
 	const deleteDataSourceResBody = ``
 

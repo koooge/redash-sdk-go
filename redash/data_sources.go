@@ -126,6 +126,42 @@ func (c *Client) GetDataSource(input *GetDataSourceInput) *GetDataSourceOutput {
 }
 
 // POST /api/data_sources/{data_source_id}
+type UpdateDataSourceInput struct {
+	DataSourceId int                           `json:"-"`
+	Options      *UpdateDataSourceInputOptions `json:"options"`
+	Name         string                        `json:"name"`
+	Type         string                        `json:"type"`
+}
+
+type UpdateDataSourceInputOptions struct {
+	Dbname string `json:"dbname"`
+}
+
+type UpdateDataSourceOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) UpdateDataSource(input *UpdateDataSourceInput) *UpdateDataSourceOutput {
+	path := "/api/data_sources/" + strconv.Itoa(input.DataSourceId)
+
+	body, err := json.Marshal(input)
+	if err != nil {
+		return &UpdateDataSourceOutput{Body: `{"error":"` + err.Error() + `"}`}
+	}
+
+	resp, err := c.post(path, string(body))
+	if err != nil {
+		return &UpdateDataSourceOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &UpdateDataSourceOutput{
+		StatusCode: resp.StatusCode,
+		Body:       string(b),
+	}
+}
 
 // DELETE /api/data_sources/{data_source_id}
 type DeleteDataSourceInput struct {
