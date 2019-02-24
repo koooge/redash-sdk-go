@@ -130,11 +130,11 @@ func TestGetDataSource(t *testing.T) {
 }
 
 func TestDeleteDataSource(t *testing.T) {
-	const deleteDataSourceResBody = `{"something":"something"}`
+	const deleteDataSourceResBody = ``
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodDelete && r.URL.Path == "/api/data_sources/123" {
-			fmt.Fprint(w, deleteDataSourceResBody)
+			w.WriteHeader(http.StatusNoContent)
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
@@ -148,7 +148,7 @@ func TestDeleteDataSource(t *testing.T) {
 		status int
 		body   string
 	}{
-		{input: &DeleteDataSourceInput{DataSourceId: 123}, status: 200, body: deleteDataSourceResBody},
+		{input: &DeleteDataSourceInput{DataSourceId: 123}, status: 204, body: deleteDataSourceResBody},
 	}
 
 	for _, c := range testCases {
