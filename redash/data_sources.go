@@ -74,6 +74,31 @@ func (c *Client) CreateDataSource(input *CreateDataSourceInput) *CreateDataSourc
 	}
 }
 
+// GET /api/data_sources/types
+type ListDataSourcesTypesInput struct {
+}
+
+type ListDataSourcesTypesOutput struct {
+	Body       string
+	StatusCode int
+}
+
+func (c *Client) ListDataSourcesTypes(_ *ListDataSourcesTypesInput) *ListDataSourcesTypesOutput {
+	path := "/api/data_sources/types"
+
+	resp, err := c.get(path)
+	if err != nil {
+		return &ListDataSourcesTypesOutput{StatusCode: resp.StatusCode, Body: `{"error":"` + err.Error() + `"}`}
+	}
+	defer resp.Body.Close()
+
+	b, _ := ioutil.ReadAll(resp.Body)
+	return &ListDataSourcesTypesOutput{
+		StatusCode: resp.StatusCode,
+		Body:       string(b),
+	}
+}
+
 // GET /api/data_sources/{data_source_id}
 type GetDataSourceInput struct {
 	DataSourceId int
@@ -127,8 +152,6 @@ func (c *Client) DeleteDataSource(input *DeleteDataSourceInput) *DeleteDataSourc
 		Body:       string(b),
 	}
 }
-
-// GET /api/data_sources/{data_source_id}/types
 
 // GET /api/data_sources/{data_source_id}/schema
 type GetDataSourceSchemaInput struct {

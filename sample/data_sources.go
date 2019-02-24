@@ -32,13 +32,18 @@ func main() {
 	fmt.Println(output2.Body)
 	dataSourceId := output2.Id
 
-	// fmt.Println("---GetDataSource()---")
-	// input3 := &redash.GetDataSourceInput{
-	// 	DataSourceId: dataSourceId,
-	// }
-	// output3 := client.GetDataSource(input3)
-	// fmt.Println(output3.StatusCode)
-	// fmt.Println(output3.Body)
+	fmt.Println("---ListDataSourcesTypes()---")
+	output3 := client.ListDataSourcesTypes(nil)
+	fmt.Println(output3.StatusCode)
+	fmt.Println(output3.Body)
+
+	fmt.Println("---GetDataSource()---")
+	input4 := &redash.GetDataSourceInput{
+		DataSourceId: dataSourceId,
+	}
+	output4 := client.GetDataSource(input4)
+	fmt.Println(output4.StatusCode)
+	fmt.Println(output4.Body)
 
 	// fmt.Println("---UpdateDataSource()---")
 	// input5 := &redash.UpdateDataSourceInput{
@@ -53,18 +58,13 @@ func main() {
 	// fmt.Println(output5.StatusCode)
 	// fmt.Println(output5.Body)
 
-	// fmt.Println("---ListDataSourceTypes()---")
-	// output6 := client.ListDataSourceTypes(nil)
-	// fmt.Println(output6.StatusCode)
-	// fmt.Println(output6.Body)
-
-	// fmt.Println("---GetDataSourceSchema()---")
-	// input7 := &redash.GetDataSourceSchemaInput{
-	// 	DataSourceId: dataSourceId,
-	// }
-	// output7 := client.GetDataSourceSchema(input7)
-	// fmt.Println(output7.StatusCode)
-	// fmt.Println(output7.Body)
+	fmt.Println("---GetDataSourceSchema()---")
+	input7 := &redash.GetDataSourceSchemaInput{
+		DataSourceId: dataSourceId,
+	}
+	output7 := client.GetDataSourceSchema(input7)
+	fmt.Println(output7.StatusCode)
+	fmt.Println(output7.Body)
 
 	// fmt.Println("---PauseDataSource()---")
 	// input8 := &redash.PauseDataSourceInput{
@@ -91,10 +91,10 @@ func main() {
 	// fmt.Println(output10.Body)
 
 	fmt.Println("---DeleteDataSource()---")
-	input5 := &redash.DeleteDataSourceInput{
+	input6 := &redash.DeleteDataSourceInput{
 		DataSourceId: dataSourceId,
 	}
-	output5 := client.DeleteDataSource(input5)
-	fmt.Println(output5.StatusCode)
-	fmt.Println(output5.Body)
+	output6 := client.DeleteDataSource(input6)
+	fmt.Println(output6.StatusCode)
+	fmt.Println(output6.Body)
 }
