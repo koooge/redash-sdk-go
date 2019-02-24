@@ -41,4 +41,4 @@ func main() {
 }
 ```
 
-See more about [sample](https://github.com/koooge/redash-sdk-go/tree/master/sample) and [doc](https://github.com/koooge/redash-sdk-go/tree/master/doc).
+See more about [sample](https://github.com/koooge/redash-sdk-go/tree/master/sample) and [doc](https://github.com/koooge/redash-sdk-go/blob/master/doc/redash.md).
