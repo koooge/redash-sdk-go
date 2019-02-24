@@ -707,6 +707,28 @@ paths:
                     type: integer
       tags:
         - DataSource
+  /api/data_sources/{data_source_id}/test:
+    post:
+      parameters:
+        - in: path
+          name: data_source_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+      tags:
+        - DataSource
   /api/groups:
     get:
       responses:
