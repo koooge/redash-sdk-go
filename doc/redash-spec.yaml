@@ -499,21 +499,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                options:
-                  type: object
-                  properties:
-                    dbname:
-                      type: string
-                name:
-                  type: string
-                type:
-                  type: string
-              required:
-                - options
-                - name
-                - type
+              $ref: '#/components/schemas/DataSourcesRequest'
       responses:
         200:
           description: OK
@@ -575,6 +561,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataSource'
+      tags:
+        - DataSource
+    post:
+      parameters:
+        - in: path
+          name: data_source_id
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataSourcesRequest'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSource'
+      tags:
+        - DataSource
+    delete:
+      parameters:
+        - in: path
+          name: data_source_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: No Content
       tags:
         - DataSource
   /api/data_sources/types:
@@ -1515,6 +1535,25 @@ components:
           type: string
         id:
           type: integer
+    DataSourcesRequest:
+      type: object
+      properties:
+        options:
+          type: object
+          properties:
+            dbname:
+              type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - pg
+            - prometheus
+      required:
+        - options
+        - name
+        - type
     Schema:
       type: object
       properties:
