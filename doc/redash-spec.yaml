@@ -559,7 +559,7 @@ paths:
                   type: object
                   properties:
                     configuration_schema:
-                      $ref: '#/components/schemas/ConfigurationSchema'
+                      $ref: '#/components/schemas/DataSourcesType'
                     type:
                       type: string
                     name:
@@ -1567,49 +1567,6 @@ paths:
 
 components:
   schemas:
-    ConfigurationSchema:
-      type: object
-      properties:
-        required:
-          type: array
-          items:
-            type: string
-        type:
-          type: string
-        properties:
-          type: object
-          properties:
-            db:
-              type: object
-              properties:
-                type:
-                  type: string
-                title:
-                  type: string
-            apikey:
-              type: object
-              properties:
-                type:
-                  type: string
-            endpoint:
-              type: object
-              properties:
-                type:
-                  type: string
-            type:
-              type: object
-              properties:
-                type:
-                  type: string
-            get_schema:
-              type: object
-              properties:
-                default:
-                  type: boolean
-                type:
-                  type: string
-                title:
-                  type: string
     DataSource:
       type: object
       properties:
@@ -1658,6 +1615,49 @@ components:
         - options
         - name
         - type
+    DataSourcesType:
+      type: object
+      properties:
+        required:
+          type: array
+          items:
+            type: string
+        type:
+          type: string
+        properties:
+          type: object
+          properties:
+            db:
+              type: object
+              properties:
+                type:
+                  type: string
+                title:
+                  type: string
+            apikey:
+              type: object
+              properties:
+                type:
+                  type: string
+            endpoint:
+              type: object
+              properties:
+                type:
+                  type: string
+            type:
+              type: object
+              properties:
+                type:
+                  type: string
+            get_schema:
+              type: object
+              properties:
+                default:
+                  type: boolean
+                type:
+                  type: string
+                title:
+                  type: string
     DestinationType:
       type: object
       properties:
