@@ -1346,6 +1346,19 @@ paths:
                     type: string
       tags:
         - Destination
+  /api/destinations/types:
+    get:
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DestinationType'
+      tags:
+        - Destination
   /api/query_snippets:
     get:
       responses:
@@ -1645,6 +1658,27 @@ components:
         - options
         - name
         - type
+    DestinationType:
+      type: object
+      properties:
+        configuration_schema:
+          type: object
+          properties:
+            required:
+              type: array
+              items:
+                type: string
+            type:
+              type: string
+            properties:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
     Schema:
       type: object
       properties:
