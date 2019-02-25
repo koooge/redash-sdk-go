@@ -1303,6 +1303,8 @@ paths:
                   type: string
                 type:
                   type: string
+                  enum:
+                    - email
               required:
                 - options
                 - name
@@ -1357,6 +1359,91 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DestinationType'
+      tags:
+        - Destination
+  /api/destinations/{destination_id}:
+    get:
+      parameters:
+        - in: path
+          name: destination_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  options:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                      username:
+                        type: string
+                      channel:
+                        type: string
+                    additionalProperties: true
+                  icon:
+                    type: string
+                  type:
+                    type: string
+                  id:
+                    type: integer
+                  name:
+                    type: string
+      tags:
+        - Destination
+    post:
+      parameters:
+        - in: path
+          name: destination_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  options:
+                    type: object
+                    properties:
+                      addresses:
+                        type: string
+                      url:
+                        type: string
+                      username:
+                        type: string
+                      channel:
+                        type: string
+                    additionalProperties: true
+                  icon:
+                    type: string
+                  type:
+                    type: string
+                  id:
+                    type: integer
+                  name:
+                    type: string
+      tags:
+        - Destination
+    delete:
+      parameters:
+        - in: path
+          name: destination_id
+          schema:
+            type: integer
+          required: true
+      responses:
+        204:
+          description: NO CONTENT
       tags:
         - Destination
   /api/query_snippets:
