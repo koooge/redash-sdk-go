@@ -29,8 +29,11 @@ type IClient interface {
 
 	// destinations
 	ListDestinations(*ListDestinationsInput) *ListDestinationsOutput
+	CreateDestination(*CreateDestinationInput) *CreateDestinationOutput
+	ListDestinationsTypes(*ListDestinationsTypesInput) *ListDestinationsTypesOutput
 	GetDestination(*GetDestinationInput) *GetDestinationOutput
-	ListDestinationTypes(*ListDestinationTypesInput) *ListDestinationTypesOutput
+	UpdateDestination(*UpdateDestinationInput) *UpdateDestinationOutput
+	DeleteDestination(*DeleteDestinationInput) *DeleteDestinationOutput
 
 	// events
 	GetEvents(*GetEventsInput) *GetEventsOutput
