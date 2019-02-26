@@ -1054,6 +1054,10 @@ paths:
           schema:
             type: boolean
           allowEmptyValue: true
+        - in: query
+          name: pending
+          schema:
+            type: boolean
       responses:
         200:
           description: OK
@@ -1071,47 +1075,7 @@ paths:
                   results:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        auth_type:
-                          type: string
-                        is_disabled:
-                          type: boolean
-                        updated_at:
-                          type: string
-                          format: date-time
-                        profile_image_url:
-                          type: string
-                          format: uri
-                        is_invitation_pending:
-                          type: boolean
-                        groups:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: integer
-                              name:
-                                type: string
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        created_at:
-                          type: string
-                          format: date-time
-                        disabled_at:
-                          type: string
-                          format: date-time
-                          nullable: true
-                        actived_at:
-                          type: string
-                          format: date-time
-                          nullable: true
-                        email:
-                          type: string
-                          format: email
+                      $ref: '#/components/schemas/User'
       tags:
         - User
     post:
@@ -1801,7 +1765,12 @@ components:
         groups:
           type: array
           items:
-            type: integer
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
         id:
           type: integer
         name:
