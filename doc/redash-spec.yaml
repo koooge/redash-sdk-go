@@ -1294,21 +1294,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                options:
-                  type: object
-                  additionalProperties: true
-                name:
-                  type: string
-                type:
-                  type: string
-                  enum:
-                    - email
-              required:
-                - options
-                - name
-                - type
+              $ref: '#/components/schemas/DestinationRequest'
       responses:
         200:
           description: OK
@@ -1404,6 +1390,12 @@ paths:
           schema:
             type: integer
           required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationRequest'
       responses:
         200:
           description: OK
@@ -1745,6 +1737,22 @@ components:
                   type: string
                 title:
                   type: string
+    DestinationRequest:
+      type: object
+      properties:
+        options:
+          type: object
+          additionalProperties: true
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - email
+      required:
+        - options
+        - name
+        - type
     DestinationType:
       type: object
       properties:
