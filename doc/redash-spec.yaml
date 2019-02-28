@@ -118,40 +118,7 @@ paths:
                           type: string
                           format: date-time
                         last_modified_by:
-                          type: object
-                          properties:
-                            auth_type:
-                              type: string
-                            is_disabled:
-                              type: boolean
-                            updated_at:
-                              type: string
-                              format: date-time
-                            profile_image_url:
-                              type: string
-                            is_inviration_pending:
-                              type: boolean
-                            groups:
-                              type: array
-                              items:
-                                type: integer
-                            id:
-                              type: integer
-                            name:
-                              type: string
-                            created_at:
-                              type: string
-                              format: date-time
-                            disabled_at:
-                              type: string
-                              format: date-time
-                            is_email_verified:
-                              type: boolean
-                            active_at:
-                              type: string
-                              format: date-time
-                            email:
-                              type: string
+                          $ref: '#/components/schemas/User'
                         options:
                           type: object
                           additionalProperties: true
@@ -908,42 +875,7 @@ paths:
                     type: string
                     format: date-time
                   last_modified_by:
-                    type: object
-                    properties:
-                      auth_type:
-                        type: string
-                      is_disabled:
-                        type: boolean
-                      updated_at:
-                        type: string
-                        format: date-time
-                      profile_image_url:
-                        type: string
-                        format: uri
-                      is_invitation_pending:
-                        type: boolean
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      created_at:
-                        type: string
-                        format: date-time
-                      disabled_at:
-                        type: string
-                        format: date-time
-                      is_email_verified:
-                        type: boolean
-                      active_at:
-                        type: string
-                        format: date-time
-                      email:
-                        type: string
-                        format: email
+                    $ref: '#/components/schemas/User'
                   options:
                     type: object
                     additionalProperties: true
@@ -1090,7 +1022,7 @@ paths:
                   type: string
                 email:
                   type: string
-                  format: emai
+                  format: email
               required:
                 - name
                 - email
@@ -1100,45 +1032,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  auth_type:
-                    type: string
-                  is_disabled:
-                    type: boolean
-                  updated_at:
-                    type: string
-                    format: date-time
-                  profile_image_url:
-                    type: string
-                    format: uri
-                  is_invitation_pending:
-                    type: boolean
-                  groups:
-                    type: array
-                    items:
-                      type: integer
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  created_at:
-                    type: string
-                    format: date-time
-                  disabled_at:
-                    type: string
-                    format: date-time
-                    nullable: true
-                  invite_link:
-                    type: string
-                    format: uri
-                  active_at:
-                    type: string
-                    format: date-time
-                    nullable: true
-                  email:
-                    type: string
-                    format: email
+                $ref: '#/components/schemas/User'
         400:
           description: Bad Request
           content:
@@ -1148,6 +1042,91 @@ paths:
                 properties:
                   message:
                     type: string
+      tags:
+        - User
+  /api/users/{userId}:
+    get:
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      tags:
+        - User
+    post:
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                name:
+                  type: string
+                password:
+                  type: string
+                old_password:
+                  type: string
+                groups:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      tags:
+        - User
+    delete:
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
       tags:
         - User
   /api/visualizations:
@@ -1784,6 +1763,8 @@ components:
           nullable: true
         is_email_verified:
           type: boolean
+        api_key:
+          type: string
         active_at:
           type: string
           format: date-time
