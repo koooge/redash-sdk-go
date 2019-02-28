@@ -71,5 +71,13 @@ type IClient interface {
 
 	// users
 	ListUsers(*ListUsersInput) *ListUsersOutput
+	CreateUser(*CreateUserInput) *CreateUserOutput
 	GetUser(*GetUserInput) *GetUserOutput
+	UpdateUser(*UpdateUserInput) *UpdateUserOutput
+	// DeleteUser(*DeleteUserInput) *DeleteUserOutput
+	// InviteUser(*InviteUserInput) *InviteUserOutput
+	// ResetUserPassword(*ResetUserPasswordInput) *ResetUserPasswordOutput
+	// RegenerateUserApiKey(*RegenerateUserApiKeyInput) *RegenerateUserApiKeyOutput
+	// DiableUser(*DiableUserInput) *DisableUserOutput
+	// EnableUser(*EnableUserInput) *EnableUserOutput
 }
