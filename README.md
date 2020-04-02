@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/koooge/redash-sdk-go/tree/master.svg?style=svg)](https://circleci.com/gh/koooge/redash-sdk-go/tree/master)
-[![Build status](https://ci.appveyor.com/api/projects/status/hv0ofxbhjf5flstm/branch/master?svg=true)](https://ci.appveyor.com/project/koooge/redash-sdk-go/branch/master)
 ![OAS Doc](https://github.com/koooge/redash-sdk-go/workflows/OAS%20Doc/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/maintainability)](https://codeclimate.com/github/koooge/redash-sdk-go/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/test_coverage)](https://codeclimate.com/github/koooge/redash-sdk-go/test_coverage)
@@ -10,7 +8,7 @@
 Redash client in go. Many APIs are still WIP.
 
 ## Prerequisites
-- go1.11+
+- go1.14.1+
 
 ## Usage
 ```go
