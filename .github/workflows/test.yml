@@ -1,4 +1,4 @@
-name: Go
+name: Test
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     - name: Set up Go 1.13
       uses: actions/setup-go@v1
       with:
-        go-version: 1.13
+        go-version: 1.14.1
       id: go
 
     - name: Check out code into the Go module directory
@@ -30,5 +30,22 @@ jobs:
             dep ensure
         fi
 
-    - name: Build
-      run: go build -v .
+    - name: Lint
+      run: |
+        go vet ./redash/...
+        gofmt -e -l `find . -name '*go'`
+
+# TODO: test on Windows
+
+    - name: Install Code Climate Test Reporter
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+    - name: make coverage
+      run: |
+        go test -coverprofile=cover.out -covermode=count ./redash/...
+        go tool cover -html=cover.out
+    - name: Code Climate Test Coverage
+      run: |
+        ./cc-test-reporter format-coverage -t gocov -o "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json" cover.out
+        ./cc-test-reporter upload-coverage -i "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json"
