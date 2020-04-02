@@ -1,5 +1,7 @@
 name: Test
 
+# TODO: test on Windows
+
 on:
   push:
     branches: [ master ]
@@ -13,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Set up Go 1.13
+    - name: Set up Go
       uses: actions/setup-go@v1
       with:
         go-version: 1.14.1
@@ -35,17 +37,16 @@ jobs:
         go vet ./redash/...
         gofmt -e -l `find . -name '*go'`
 
-# TODO: test on Windows
-
-    - name: Install Code Climate Test Reporter
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-    - name: make coverage
+    - name: Coverage
       run: |
         go test -coverprofile=cover.out -covermode=count ./redash/...
         go tool cover -html=cover.out
+
     - name: Code Climate Test Coverage
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        CC_FILE: coverage/codeclimate.${{ github.run_number }}.json
       run: |
-        ./cc-test-reporter format-coverage -t gocov -o "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json" cover.out
-        ./cc-test-reporter upload-coverage -i "coverage/codeclimate.${CIRCLE_NODE_INDEX}.json"
+        curl -sSL https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter
+        ./cc-test-reporter format-coverage --input-type gocov --output ${{ env.CC_FILE }} cover.out
+        ./cc-test-reporter upload-coverage -i ${{ env.CC_FILE }}
