@@ -1,3 +1,4 @@
+![Test](https://github.com/koooge/redash-sdk-go/workflows/Test/badge.svg)
 ![OAS Doc](https://github.com/koooge/redash-sdk-go/workflows/OAS%20Doc/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/maintainability)](https://codeclimate.com/github/koooge/redash-sdk-go/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/87203e61bd46d720e1d1/test_coverage)](https://codeclimate.com/github/koooge/redash-sdk-go/test_coverage)
