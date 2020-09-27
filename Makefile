@@ -2,7 +2,7 @@ get:
 	go get ./redash/...
 
 lint: get
-	go tool vet redash
+	go vet ./redash/...
 	gofmt -e -l `find . -name '*go'`
 
 test: get lint
