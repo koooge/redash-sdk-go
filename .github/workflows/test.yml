@@ -35,7 +35,7 @@ jobs:
     - name: Lint
       run: |
         go vet ./redash/...
-        gofmt -e -l `find . -name '*go'`
+        test `gofmt -l . | wc -l` = 0
 
     - name: Coverage
       run: |
