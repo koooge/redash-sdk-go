@@ -24,10 +24,6 @@ jobs:
         go-version: ${{ matrix.go }}
       id: go
 
-    - name: Get dependencies
-      run: |
-        go get -v -u -t -d ./...
-
     - name: Lint
       run: |
         go vet ./redash/...

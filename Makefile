@@ -1,14 +1,11 @@
-get:
-	go get -v -u -t -d ./redash/...
-
-lint: get
+lint:
 	go vet ./redash/...
 	gofmt -l ./redash/
 
-test: get lint
+test: lint
 	go test -v -cover ./redash/...
 
-coverage: get
+coverage:
 	go test -coverprofile=cover.out -covermode=count ./redash/...
 	go tool cover -html=cover.out
 
@@ -19,4 +16,4 @@ doc: doc-deps
 	rm -f doc/redash.md
 	godocdown redash > doc/redash.md
 
-.PHONY: get lint test coverage doc-deps doc
+.PHONY: lint test coverage doc-deps doc
