@@ -3,7 +3,7 @@ get:
 
 lint: get
 	go vet ./redash/...
-	gofmt -e -l `find . -name '*go'`
+	gofmt -l ./redash/
 
 test: get lint
 	go test -v -cover ./redash/...
