@@ -7,9 +7,6 @@
 # redash-sdk-go
 Redash client in go. Many APIs are still WIP.
 
-## Prerequisites
-- go1.14.1+
-
 ## Usage
 ```go
 package main
