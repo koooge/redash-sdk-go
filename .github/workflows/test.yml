@@ -29,16 +29,13 @@ jobs:
         go vet ./redash/...
         test `gofmt -l . | wc -l` = 0
 
-    - name: Coverage
+    - name: Test and Coverage
       run: |
         go test -coverprofile=cover.out -covermode=count ./redash/...
-        go tool cover -html=cover.out
 
-    - name: Code Climate Test Coverage
+    - uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        CC_FILE: coverage/codeclimate.${{ github.run_number }}.json
-      run: |
-        curl -sSL https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter && chmod +x ./cc-test-reporter
-        ./cc-test-reporter format-coverage --input-type gocov --output ${{ env.CC_FILE }} cover.out
-        ./cc-test-reporter upload-coverage -i ${{ env.CC_FILE }}
+      with:
+        coverageLocations: cover.out:gocov
+        prefix: github.com/koooge/redash-sdk-go
